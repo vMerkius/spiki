@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { getUserByEmailAPI } from "../../server/server";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,8 +10,20 @@ const Login = () => {
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
   };
 
+  // const fetchUser = async (email: string) => {
+  //   const fetchedUser = await getUserByEmailAPI(email);
+  //   if (
+  //     fetchedUser.email === loginData.email &&
+  //     fetchedUser.password === loginData.password
+  //   ) {
+  //     alert("god");
+  //   } else {
+  //     alert("bad");
+  //   }
+  // };
+
   const handleLogin = () => {
-    navigate("/dashboard");
+    navigate("/user-courses/1");
   };
   return (
     <form className="form-display">
@@ -32,7 +45,13 @@ const Login = () => {
           onChange={handleChange}
         />
       </label>
-      <button type="button" className="btn-submit">
+      <button
+        onClick={() => {
+          handleLogin();
+        }}
+        type="button"
+        className="btn-submit"
+      >
         Log In
       </button>
     </form>

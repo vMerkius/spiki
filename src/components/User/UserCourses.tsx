@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ICourse } from "../../interfaces/ICourse";
 import { getUserCoursesAPI } from "../../server/server";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import "./user-courses.scss";
 import AllCourses from "./AllCourses";
 
@@ -10,6 +10,7 @@ import AllCourses from "./AllCourses";
 // };
 
 const UserCourses: React.FC = () => {
+  const navigate = useNavigate();
   const value = useParams();
   const id = Number(value.id);
   const [showAll, setShowAll] = useState(false);
@@ -39,6 +40,13 @@ const UserCourses: React.FC = () => {
               </td>
               <td className="user-courses__table__row__level">
                 {course.level}
+              </td>
+              <td
+                onClick={() => {
+                  navigate("/user-courses/" + id + "/" + course.id);
+                }}
+              >
+                {">"}
               </td>
             </tr>
           ))}

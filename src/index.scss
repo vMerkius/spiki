@@ -1,3 +1,5 @@
+@use "colors" as c;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +7,8 @@
 
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #242424; */
-  background-color: rgb(37, 77, 77);
+  /* background-color: rgb(37, 77, 77); */
+  // background: linear-gradient(to right, c.$yellow-back 50%, c.$black-back 50%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

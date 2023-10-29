@@ -50,7 +50,7 @@ const Login = () => {
           handleLogin();
         }}
         type="button"
-        className="btn-submit"
+        className="btn-submit btn-submit--login"
       >
         Log In
       </button>

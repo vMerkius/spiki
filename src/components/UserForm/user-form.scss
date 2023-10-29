@@ -1,0 +1,110 @@
+@use "../../colors.scss" as c;
+.logging {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, c.$yellow-back 50%, c.$black-back 50%);
+
+  &__user-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    transition: left 0.3s ease;
+    transform: translate(-50%, -50%);
+
+    &--login {
+      border: 5px red solid;
+      color: c.$white;
+      left: 25%;
+      background-color: c.$black-back;
+    }
+    &--register {
+      border: 5px red solid;
+      left: 75%;
+      color: c.$black;
+      background-color: c.$yellow-back;
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: center;
+
+      &__btn {
+        transition: background-color 0.5s ease, color 1s ease-out;
+
+        width: 100%;
+        border-radius: 10px;
+        background-color: c.$white;
+        padding: 10px;
+        border: none;
+
+        &--right {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &--left {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: c.$black;
+          color: c.$white;
+        }
+      }
+    }
+  }
+  &__register {
+    &__buttons {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      &__btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: c.$black;
+        color: c.$white;
+        border: none;
+        &:hover {
+          cursor: pointer;
+          border: 5px solid c.$black;
+        }
+        &--active {
+          background-color: c.$white;
+          color: c.$black;
+        }
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    transition: top 1s ease-in-out;
+    left: 75%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+      font-size: 32px;
+      margin: 0;
+    }
+    &--login {
+      h1 {
+        top: 55%;
+        color: c.$yellow-back;
+      }
+    }
+    &--register {
+      top: 45%;
+      left: 25%;
+      color: c.$black;
+    }
+  }
+}

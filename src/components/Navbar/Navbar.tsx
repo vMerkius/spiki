@@ -13,6 +13,9 @@ const Navbar: React.FC = () => {
           <Link to="/about">About</Link>
         </li>
         <li className="navbar__items__navi">
+          <Link to="/dictionary">Słownik</Link>
+        </li>
+        <li className="navbar__items__navi">
           <Link to="/contact">Contact</Link>
         </li>
       </ul>

@@ -25,13 +25,13 @@ const UserCourses: React.FC = () => {
 
   return (
     <div className="user-courses">
-      {showAll && <AllCourses />}
-      <h1>User Courses</h1>
+      {showAll && <AllCourses setShowAll={setShowAll} />}
+      <h1>Twoje kursy:</h1>
       <table className="user-courses__table">
         <thead className="user-courses__table__header">
           <tr>
-            <th>Language</th>
-            <th>Level</th>
+            <th>Język</th>
+            <th>Poziom</th>
           </tr>
           {userCourses.map((course) => (
             <tr className="user-courses__table__row" key={course.id}>
@@ -42,11 +42,12 @@ const UserCourses: React.FC = () => {
                 {course.level}
               </td>
               <td
+                className="user-courses__table__row__continue"
                 onClick={() => {
                   navigate("/user-courses/" + id + "/" + course.id);
                 }}
               >
-                {">"}
+                Kontynuuj
               </td>
             </tr>
           ))}
@@ -54,12 +55,12 @@ const UserCourses: React.FC = () => {
       </table>
 
       <button
-        className="user-courses__"
+        className="user-courses__join"
         onClick={() => {
           setShowAll(true);
         }}
       >
-        Join new
+        Dołącz do kursu
       </button>
     </div>
   );

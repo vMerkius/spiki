@@ -42,7 +42,7 @@ const UserForm: React.FC = () => {
               setLoggingIn(true);
             }}
           >
-            Sign in
+            Zaloguj się
           </button>
           <button
             className={`logging__user-form__buttons__btn
@@ -52,7 +52,7 @@ const UserForm: React.FC = () => {
               setLoggingIn(false);
             }}
           >
-            Sign up
+            Zarejestruj
           </button>
         </div>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { addUserAPI } from "../../server/server";
 
+const genders = ["M", "W"];
 const Register = () => {
   const navigate = useNavigate();
   const [section, setSection] = useState(1);
@@ -18,11 +19,14 @@ const Register = () => {
     imageUrl: "",
   });
   const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setRegisterData({
       ...registerData,
       [event.target.name]: event.target.value,
     });
+    console.log(registerData);
     if (event.target.name === "password") {
       if (!event.target.value.match(regex)) {
         setPasswordError(
@@ -44,9 +48,29 @@ const Register = () => {
       }
     }
   };
-  const handleRegister = () => {
-    const { confirmPassword, ...dataToSend } = registerData;
-    addUserAPI(dataToSend);
+  const handleRegister = async () => {
+    if (
+      passwordError ||
+      confirmPasswordError ||
+      registerData.name === "" ||
+      registerData.email === "" ||
+      registerData.dateOfBirth === "" ||
+      registerData.gender === "" ||
+      registerData.country === "" ||
+      registerData.password === "" ||
+      registerData.confirmPassword === ""
+    ) {
+      alert("Wypełnij wszystkie pola formularza.");
+      return;
+    } else {
+      const { confirmPassword, ...dataToSend } = registerData;
+      const response = await addUserAPI(dataToSend);
+      if (response === "Successfully created") {
+        window.location.reload();
+      } else {
+        console.error("Błąd podczas rejestracji:", response.data);
+      }
+    }
   };
 
   return (
@@ -82,12 +106,18 @@ const Register = () => {
           </label>
           <label>
             Płeć:
-            <input
-              type="text"
+            <select
+              className="language-select"
               name="gender"
               value={registerData.gender}
               onChange={handleChange}
-            />
+            >
+              {genders.map((gender, index) => (
+                <option key={index} value={gender}>
+                  {gender === "M" ? "Mężczyzna" : "Kobieta"}{" "}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Kraj:
@@ -153,18 +183,18 @@ const Register = () => {
           </button>
         </form>
       )}
-      <div className="register__buttons">
+      <div className="logging__register__buttons">
         <button
-          className={`register__buttons__btn ${
-            section === 1 ? "register__buttons__btn--active" : ""
+          className={`logging__register__buttons__btn ${
+            section === 1 ? "logging__register__buttons__btn--active" : ""
           } `}
           onClick={() => setSection(1)}
         >
           1
         </button>
         <button
-          className={`register__buttons__btn ${
-            section === 2 ? "register__buttons__btn--active" : ""
+          className={`logging__register__buttons__btn ${
+            section === 2 ? "logging__register__buttons__btn--active" : ""
           }`}
           onClick={() => setSection(2)}
         >

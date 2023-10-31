@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { getUserByEmailAPI } from "../../server/server";
+import { getUserByEmailAPI, loginUserAPI } from "../../server/server";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,20 +10,13 @@ const Login = () => {
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
   };
 
-  // const fetchUser = async (email: string) => {
-  //   const fetchedUser = await getUserByEmailAPI(email);
-  //   if (
-  //     fetchedUser.email === loginData.email &&
-  //     fetchedUser.password === loginData.password
-  //   ) {
-  //     alert("god");
-  //   } else {
-  //     alert("bad");
-  //   }
-  // };
-
-  const handleLogin = () => {
-    navigate("/user-courses/1");
+  const handleLogin = async () => {
+    const response = await loginUserAPI(loginData.email, loginData.password);
+    if (response === "Successfully logged in") {
+      navigate("/user-courses/1");
+    } else {
+      alert("Niepoprawny email lub hasło.");
+    }
   };
   return (
     <form className="form-display">
@@ -37,7 +30,7 @@ const Login = () => {
         />
       </label>
       <label>
-        Password:
+        Hasło:
         <input
           type="password"
           name="password"
@@ -52,7 +45,7 @@ const Login = () => {
         type="button"
         className="btn-submit btn-submit--login"
       >
-        Log In
+        Zaloguj
       </button>
     </form>
   );

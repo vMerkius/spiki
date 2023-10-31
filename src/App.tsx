@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import UserCourses from "./components/User/UserCourses";
 import Loading from "./components/shared/Loading";
 import CourseMainPage from "./components/Course/CourseMainPAge";
+import Dictionary from "./components/Dictionary/Dictionary";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         {/* <Loading></Loading> */}
         <Routes>
           <Route path="/" element={<UserForm />} />
+          <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/user-courses/:id" element={<UserCourses />} />
           <Route
             path="/user-courses/:id/:courseId"

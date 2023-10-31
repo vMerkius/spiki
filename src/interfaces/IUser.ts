@@ -3,7 +3,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | string;
   gender: string;
   country: string;
   imageUrl: string;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getCourseAllModulesAPI } from "../../server/server";
 import { IModule } from "../../interfaces/IModule";
+import "./course-main-page.scss";
 
 const CourseMainPage = () => {
   const value = useParams();
@@ -15,15 +16,17 @@ const CourseMainPage = () => {
     };
     fetchModules();
   }, [id]);
+
   return (
     <>
-      {modules.map((module) => (
-        <div key={module.id}>
-          <p>{module.description}</p>
-        </div>
-      ))}
+      <div>
+        {modules.map((module) => (
+          <div key={module.id}>{module.id}</div>
+        ))}
+      </div>
       <h1>cxnhjkcbzx</h1>
     </>
   );
 };
+
 export default CourseMainPage;

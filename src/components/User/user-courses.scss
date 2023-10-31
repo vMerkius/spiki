@@ -1,17 +1,68 @@
+@use "../../colors.scss" as c;
 .user-courses {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   &__table {
-    width: 40%;
-    background-color: red;
+    margin-bottom: 20px;
+    width: 30vw;
+    border: 1px solid c.$gray;
+    padding: 20px;
+
+    td,
+    th {
+      color: c.$black;
+    }
     &__row {
       &__level {
         width: 40%;
       }
       &__lang {
         width: 60%;
+      }
+      &__continue {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &__join {
+    padding: 10px;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.all-courses-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  z-index: 1;
+  &__window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #777;
+    background-color: #fff;
+    padding: 5px 20px 10px 20px;
+    border: 1px solid #000;
+    &__input {
+      width: 70%;
+      left: 0;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        margin: 0;
       }
     }
   }

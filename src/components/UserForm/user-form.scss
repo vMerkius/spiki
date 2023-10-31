@@ -7,21 +7,20 @@
   &__user-form {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
     width: 300px;
     position: absolute;
     top: 50%;
     transition: left 0.3s ease;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
 
     &--login {
-      border: 5px red solid;
       color: c.$white;
       left: 25%;
       background-color: c.$black-back;
     }
     &--register {
-      border: 5px red solid;
       left: 75%;
       color: c.$black;
       background-color: c.$yellow-back;
@@ -33,13 +32,11 @@
 
       &__btn {
         transition: background-color 0.5s ease, color 1s ease-out;
-
+        border: none;
         width: 100%;
         border-radius: 10px;
         background-color: c.$white;
         padding: 10px;
-        border: none;
-
         &--right {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -51,7 +48,7 @@
 
         &:hover {
           cursor: pointer;
-          background-color: c.$black;
+          background-color: rgba(c.$blue-buttons, 0.83);
           color: c.$white;
         }
       }
@@ -67,16 +64,16 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: c.$black;
-        color: c.$white;
+        color: c.$black;
         border: none;
         &:hover {
           cursor: pointer;
-          border: 5px solid c.$black;
+          border: 2px solid c.$blue-buttons;
         }
         &--active {
           background-color: c.$white;
           color: c.$black;
+          border: 2px solid c.$blue-buttons;
         }
       }
     }
@@ -107,4 +104,13 @@
       color: c.$black;
     }
   }
+}
+
+.btn--active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: c.$blue-buttons;
+  color: c.$white;
+  // border: 2px solid c.$blue-buttons;
 }

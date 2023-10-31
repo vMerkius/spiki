@@ -1,56 +1,61 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getCoursesAPI } from "../../server/server";
+import { getCoursesNonParticipatingAPI } from "../../server/server";
+import { ICourse } from "../../interfaces/ICourse";
+import { useParams } from "react-router";
 
-const PAGE_SIZE = 10;
+type AllCoursesProps = {
+  setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-interface Course {
-  id: number;
-  name: string;
-  description: string;
-}
-
-const AllCourses: React.FC = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
+const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
+  const value = useParams();
+  const id = Number(value.id);
+  const [courses, setCourses] = useState<ICourse[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredCourses, setFilteredCourses] = useState<ICourse[]>([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const fetchedCourses = await getCoursesAPI();
+      const fetchedCourses = await getCoursesNonParticipatingAPI(id);
       setCourses(fetchedCourses);
     };
     fetchCourses();
   }, []);
 
+  useEffect(() => {
+    const filteredCoursesSearch = courses.filter((course) =>
+      course.language.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCourses(filteredCoursesSearch);
+  }, [searchTerm, courses]);
+
+  const handleCancel = () => {
+    setShowAll(false);
+  };
+
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search courses"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <ul>
-        {courses.map((course) => (
-          <li key={course.id}>
-            <h3>{course.name}</h3>
-            <p>{course.description}</p>
-          </li>
-        ))}
-      </ul>
-      {/* <div>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-          (pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => handlePageChange(pageNumber)}
-              disabled={pageNumber === currentPage}
-            >
-              {pageNumber}
-            </button>
-          )
-        )}
-      </div> */}
+    <div className="all-courses-container">
+      <div className="all-courses-container__window">
+        <button className="cancel-btn" onClick={handleCancel}>
+          X
+        </button>
+        <input
+          className="input-style all-courses-container__window__input"
+          type="text"
+          placeholder="Wyszukaj język"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <ul>
+          {filteredCourses.map((course) => (
+            <li key={course.id}>
+              <p>
+                {course.language} - {course.level}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

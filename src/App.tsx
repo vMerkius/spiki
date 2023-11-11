@@ -7,8 +7,9 @@ import UserForm from "./components/UserForm/UserForm";
 import Navbar from "./components/Navbar/Navbar";
 import UserCourses from "./components/User/UserCourses";
 import Loading from "./components/shared/Loading";
-import CourseMainPage from "./components/Course/CourseMainPAge";
 import Dictionary from "./components/Dictionary/Dictionary";
+import CourseMainPage from "./components/Course/CourseMainPage";
+import Flashcards from "./components/Course/Flashcards/Flashcards";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           <Route
             path="/user-courses/:id/:courseId"
             element={<CourseMainPage />}
+          />
+          <Route
+            path="/user-courses/:id/:courseId/:moduleId/flashcards/:flashcardId"
+            element={<Flashcards />}
           />
         </Routes>
       </div>

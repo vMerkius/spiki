@@ -88,3 +88,57 @@ export const getDefinitionAPI = async (searchTerm: string) => {
     return [];
   }
 };
+
+//Module API
+
+export const getModuleAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/module/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch module:", error);
+    return {};
+  }
+};
+
+export const getLessonsFromModuleAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/module/all/lessons/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch lessons:", error);
+    return [];
+  }
+};
+
+export const getFlashcardsFromModuleAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/module/all/flashcards/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch flashcards:", error);
+    return [];
+  }
+};
+
+// Flashcard API
+
+export const getFlashcardAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/flashcard/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch flashcard:", error);
+    return [];
+  }
+};
+
+export const getFlashcardWordsAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/flashcard/all/words/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch words:", error);
+    return {};
+  }
+};

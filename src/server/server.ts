@@ -142,3 +142,24 @@ export const getFlashcardWordsAPI = async (id: number) => {
     return {};
   }
 };
+
+// Subject API
+export const getLessonSubjectsAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/lesson/all/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch subjects:", error);
+    return {};
+  }
+};
+
+export const getSubjectAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/subject/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch subject:", error);
+    return [];
+  }
+};

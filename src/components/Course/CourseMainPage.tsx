@@ -4,12 +4,15 @@ import { getCourseAllModulesAPI } from "../../server/server";
 import { IModule } from "../../interfaces/IModule";
 import "./course-main-page.scss";
 import ModuleDetails from "./ModuleDetails";
+import ModuleSidebar from "./ModuleSidebar";
 
 const CourseMainPage = () => {
   const value = useParams();
   const id = Number(value.courseId);
   const [modules, setModules] = useState<IModule[]>([]);
   const [moduleChosen, setModuleChosen] = useState<number>(-1);
+  const [flashcardChosen, setFlashcardChosen] = useState<number>(-1);
+  const [lessonChosen, setLessonChosen] = useState<number>(-1);
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -23,23 +26,24 @@ const CourseMainPage = () => {
     <div className="course-page">
       <div className="course-page__modules">
         {!modules && <h2>No modules</h2>}
-
-        {modules.map((module) => (
-          <div
-            onClick={() => setModuleChosen(module.id)}
-            key={module.id}
-            className="course-page__modules__tile"
-            title={module.description}
-          >
-            <h2>{module.name}</h2>
-          </div>
-        ))}
+        <ModuleSidebar
+          modules={modules}
+          setModuleChosen={setModuleChosen}
+          setFlashcardChosen={setFlashcardChosen}
+          setLessonChosen={setLessonChosen}
+        />
       </div>
       <div className="course-page__details">
         {moduleChosen === -1 ? (
           <h1>Choose a module</h1>
         ) : (
-          <ModuleDetails moduleId={moduleChosen}></ModuleDetails>
+          <ModuleDetails
+            lessonChosen={lessonChosen}
+            flashcardChosen={flashcardChosen}
+            setFlashcardChosen={setFlashcardChosen}
+            setLessonChosen={setLessonChosen}
+            moduleId={moduleChosen}
+          ></ModuleDetails>
         )}
       </div>
     </div>

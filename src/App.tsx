@@ -10,6 +10,7 @@ import Loading from "./components/shared/Loading";
 import Dictionary from "./components/Dictionary/Dictionary";
 import CourseMainPage from "./components/Course/CourseMainPage";
 import Flashcards from "./components/Course/Flashcards/Flashcards";
+import Lessons from "./components/Course/Lessons/Lessons";
 
 function App() {
   return (
@@ -25,10 +26,14 @@ function App() {
             path="/user-courses/:id/:courseId"
             element={<CourseMainPage />}
           />
-          <Route
+          {/* <Route
             path="/user-courses/:id/:courseId/:moduleId/flashcards/:flashcardId"
             element={<Flashcards />}
           />
+          <Route
+            path="/user-courses/:id/:courseId/:moduleId/lessons"
+            element={<Lessons />}
+          /> */}
         </Routes>
       </div>
     </Router>

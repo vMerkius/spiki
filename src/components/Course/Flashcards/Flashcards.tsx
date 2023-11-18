@@ -7,9 +7,12 @@ import ArrowLeftIcon from "../../../../public/icons/arrow-left-icon.svg";
 import ArrowRightIcon from "../../../../public/icons/arrow-right-icon.svg";
 import "./flashcards.scss";
 
-const Flashcards = () => {
+type FlashcardsProps = {
+  flashcardId: number;
+};
+const Flashcards: React.FC<FlashcardsProps> = ({ flashcardId }) => {
   const value = useParams();
-  const flashcardId = Number(value.flashcardId);
+  // const flashcardId = Number(value.flashcardId);
   const [flashcard, setFlashcard] = useState<IFlashcard>();
   const [words, setWords] = useState<IWord[]>([]);
   const [current, setCurrent] = useState<number>(0);

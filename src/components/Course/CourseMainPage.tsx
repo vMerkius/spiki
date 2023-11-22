@@ -13,6 +13,7 @@ const CourseMainPage = () => {
   const [moduleChosen, setModuleChosen] = useState<number>(-1);
   const [flashcardChosen, setFlashcardChosen] = useState<number>(-1);
   const [lessonChosen, setLessonChosen] = useState<number>(-1);
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -31,6 +32,7 @@ const CourseMainPage = () => {
           setModuleChosen={setModuleChosen}
           setFlashcardChosen={setFlashcardChosen}
           setLessonChosen={setLessonChosen}
+          setShowQuiz={setShowQuiz}
         />
       </div>
       <div className="course-page__details">
@@ -43,6 +45,8 @@ const CourseMainPage = () => {
             setFlashcardChosen={setFlashcardChosen}
             setLessonChosen={setLessonChosen}
             moduleId={moduleChosen}
+            showQuiz={showQuiz}
+            setShowQuiz={setShowQuiz}
           ></ModuleDetails>
         )}
       </div>

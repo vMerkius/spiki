@@ -9,6 +9,7 @@ import { IModule } from "../../interfaces/IModule";
 import { useNavigate } from "react-router";
 import Flashcards from "./Flashcards/Flashcards";
 import Lessons from "./Lessons/Lessons";
+import Quiz from "./Quiz/Quiz";
 
 type ModuleDetailsProps = {
   moduleId: number;
@@ -16,6 +17,8 @@ type ModuleDetailsProps = {
   setFlashcardChosen: React.Dispatch<React.SetStateAction<number>>;
   lessonChosen: number;
   setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
+  showQuiz: boolean;
+  setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ModuleDetails: React.FC<ModuleDetailsProps> = ({
@@ -24,13 +27,15 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   setFlashcardChosen,
   lessonChosen,
   setLessonChosen,
+  showQuiz,
+  setShowQuiz,
 }) => {
   const navigate = useNavigate();
   const [module, setModule] = useState<IModule>();
   const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
   const [lessons, setLessons] = useState<IFlashcard[]>([]);
-  // const [flashcardChosen, setFlashcardChosen] = useState<number>(-1);
-  // const [lessonChosen, setLessonChosen] = useState<number>(-1);
+  // const [showQuiz, setShowQuiz] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedModule = await getModuleAPI(moduleId);
@@ -44,48 +49,63 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   }, [moduleId]);
   return (
     <div className="module-details">
-      {flashcardChosen === -1 && lessonChosen === -1 && (
-        <div className="module-details">
-          <h1>Module Details</h1>
-          <h2>{module?.description}</h2>
-          <div className="module-details__choice">
-            <div className="module-details__choice__flashcards">
-              <h2>Flashcards</h2>
-              {flashcards.map((flashcard) => (
-                <div
-                  key={flashcard.id}
-                  onClick={
-                    () => setFlashcardChosen(flashcard.id)
-                    // navigate(
-                    //   `/user-courses/1/1/${moduleId}/flashcards/${flashcard.id}`
-                    // )
-                  }
-                >
-                  <h3>{flashcard.name}</h3>
+      {showQuiz ? (
+        <Quiz setShowQuiz={setShowQuiz} moduleId={moduleId} />
+      ) : (
+        <>
+          <button
+            onClick={() => {
+              setShowQuiz(true);
+            }}
+          >
+            Zakończ moduł i wypełnij quiz
+          </button>
+          {flashcardChosen === -1 && lessonChosen === -1 && (
+            <div className="module-details">
+              <h1>Module Details</h1>
+              <h2>{module?.description}</h2>
+              <div className="module-details__choice">
+                <div className="module-details__choice__flashcards">
+                  <h2>Flashcards</h2>
+                  {flashcards.map((flashcard) => (
+                    <div
+                      key={flashcard.id}
+                      onClick={
+                        () => setFlashcardChosen(flashcard.id)
+                        // navigate(
+                        //   `/user-courses/1/1/${moduleId}/flashcards/${flashcard.id}`
+                        // )
+                      }
+                    >
+                      <h3>{flashcard.name}</h3>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div className="module-details__choice__lessons">
-              <h2>Lessons</h2>
-              {lessons.map((lesson) => (
-                <div
-                  key={lesson.id}
-                  onClick={() =>
-                    // navigate(`/user-courses/1/1/${moduleId}/lessons`)
-                    setLessonChosen(lesson.id)
-                  }
-                >
-                  <h3>{lesson.name}</h3>
+                <div className="module-details__choice__lessons">
+                  <h2>Lessons</h2>
+                  {lessons.map((lesson) => (
+                    <div
+                      key={lesson.id}
+                      onClick={() =>
+                        // navigate(`/user-courses/1/1/${moduleId}/lessons`)
+                        setLessonChosen(lesson.id)
+                      }
+                    >
+                      <h3>{lesson.name}</h3>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </div>
+          )}
+          {flashcardChosen !== -1 && (
+            <Flashcards flashcardId={flashcardChosen}></Flashcards>
+          )}
+          {lessonChosen !== -1 && (
+            <Lessons lessonChosen={lessonChosen}></Lessons>
+          )}
+        </>
       )}
-      {flashcardChosen !== -1 && (
-        <Flashcards flashcardId={flashcardChosen}></Flashcards>
-      )}
-      {lessonChosen !== -1 && <Lessons lessonChosen={lessonChosen}></Lessons>}
     </div>
   );
 };

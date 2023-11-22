@@ -163,3 +163,47 @@ export const getSubjectAPI = async (id: number) => {
     return [];
   }
 };
+
+//Quiz API
+export const getModuleQuizAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/quiz/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch quiz:", error);
+    return {};
+  }
+};
+
+export const getQuizQuestionsAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/quiz/all/questions/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch questions:", error);
+    return {};
+  }
+};
+
+//QuestionAPI
+export const getQuestionAnswersAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/question/all/answers/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch answers:", error);
+    return {};
+  }
+};
+
+export const checkAnswerAPI = async (questionId: number, answer: number) => {
+  try {
+    const res = await axios.put(`${URL}/question/${questionId}/${answer}`);
+
+    console.log(res.status);
+    return res.status;
+  } catch (error) {
+    console.error("Failed to check answer:", error);
+    return {};
+  }
+};

@@ -1,0 +1,9 @@
+@use "../../../colors.scss" as c;
+
+.quiz {
+  position: relative;
+}
+
+.answer {
+  color: c.$black;
+}

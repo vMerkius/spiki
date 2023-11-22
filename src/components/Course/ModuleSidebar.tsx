@@ -5,6 +5,7 @@ type ModuleSidebarProps = {
   setModuleChosen: React.Dispatch<React.SetStateAction<number>>;
   setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
   setFlashcardChosen: React.Dispatch<React.SetStateAction<number>>;
+  setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
@@ -12,6 +13,7 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
   setModuleChosen,
   setLessonChosen,
   setFlashcardChosen,
+  setShowQuiz,
 }) => {
   return (
     <>
@@ -21,6 +23,7 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
             setModuleChosen(module.id);
             setLessonChosen(-1);
             setFlashcardChosen(-1);
+            setShowQuiz(false);
           }}
           key={module.id}
           className="course-page__modules__tile"

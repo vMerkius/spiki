@@ -9,8 +9,7 @@ import UserCourses from "./components/User/UserCourses";
 import Loading from "./components/shared/Loading";
 import Dictionary from "./components/Dictionary/Dictionary";
 import CourseMainPage from "./components/Course/CourseMainPage";
-import Flashcards from "./components/Course/Flashcards/Flashcards";
-import Lessons from "./components/Course/Lessons/Lessons";
+import LearningMode from "./components/Course/LearningMode";
 
 function App() {
   return (
@@ -25,6 +24,10 @@ function App() {
           <Route
             path="/user-courses/:id/:courseId"
             element={<CourseMainPage />}
+          />
+          <Route
+            path="/user-courses/:id/:courseId/:moduleId/learning"
+            element={<LearningMode />}
           />
           {/* <Route
             path="/user-courses/:id/:courseId/:moduleId/flashcards/:flashcardId"

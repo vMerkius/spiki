@@ -6,10 +6,10 @@ import {
   getModuleAPI,
 } from "../../server/server";
 import { IModule } from "../../interfaces/IModule";
-import { useNavigate } from "react-router";
 import Flashcards from "./Flashcards/Flashcards";
 import Lessons from "./Lessons/Lessons";
 import Quiz from "./Quiz/Quiz";
+import { useNavigate, useParams } from "react-router";
 
 type ModuleDetailsProps = {
   moduleId: number;
@@ -30,6 +30,8 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   showQuiz,
   setShowQuiz,
 }) => {
+  const value = useParams();
+  const { id, courseId } = value;
   const navigate = useNavigate();
   const [module, setModule] = useState<IModule>();
   const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
@@ -53,6 +55,13 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
         <Quiz setShowQuiz={setShowQuiz} moduleId={moduleId} />
       ) : (
         <>
+          <button
+            onClick={() => {
+              navigate(`/user-courses/${id}/${courseId}/${moduleId}/learning`);
+            }}
+          >
+            learning mode
+          </button>
           <button
             onClick={() => {
               setShowQuiz(true);

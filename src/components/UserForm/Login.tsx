@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getUserByEmailAPI, loginUserAPI } from "../../server/server";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,10 +12,19 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    const response = await loginUserAPI(loginData.email, loginData.password);
-    if (response === "Successfully logged in") {
+    try {
+      const response: string = await loginUserAPI(
+        loginData.email,
+        loginData.password
+      );
+      console.log(response);
+      const decode = jwtDecode(response);
+      console.log(decode);
+
+      localStorage.setItem("token", response);
       navigate("/user-courses/1");
-    } else {
+    } catch (error) {
+      console.error("Błąd logowania", error);
       alert("Niepoprawny email lub hasło.");
     }
   };

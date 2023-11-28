@@ -1,8 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  const [showLogout, setShowLogout] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setShowLogout(true);
+    }
+  }, [navigate]);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setShowLogout(false);
+    navigate("/");
+  };
   return (
     <nav className="navbar">
       <ul className="navbar__items">
@@ -18,6 +31,11 @@ const Navbar: React.FC = () => {
         <li className="navbar__items__navi">
           <Link to="/contact">Contact</Link>
         </li>
+        {showLogout && (
+          <li className="navbar__items__navi">
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        )}
       </ul>
     </nav>
   );

@@ -207,3 +207,14 @@ export const checkAnswerAPI = async (questionId: number, answer: number) => {
     return {};
   }
 };
+
+// LearningAPI
+export const getLearningAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/learning/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch learning data:", error);
+    return {};
+  }
+};

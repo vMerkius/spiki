@@ -4,27 +4,15 @@ import { getFlashcardAPI, getFlashcardWordsAPI } from "../../../server/server";
 import { IWord } from "../../../interfaces/IWord";
 import ArrowLeftIcon from "../../../../public/icons/arrow-left-icon.svg";
 import ArrowRightIcon from "../../../../public/icons/arrow-right-icon.svg";
-import "./flashcards.scss";
 
 type FlashcardsProps = {
-  flashcardId: number;
+  flashcard: IFlashcard;
 };
-const Flashcards: React.FC<FlashcardsProps> = ({ flashcardId }) => {
-  const [flashcard, setFlashcard] = useState<IFlashcard>();
+const Flashcards: React.FC<FlashcardsProps> = ({ flashcard }) => {
   const [words, setWords] = useState<IWord[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [showBack, setShowBack] = useState(true);
   const [isFlipped, setIsFlipped] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedFlashcard = await getFlashcardAPI(flashcardId);
-      const fetchedWords = await getFlashcardWordsAPI(flashcardId);
-      setWords(fetchedWords);
-      setFlashcard(fetchedFlashcard);
-    };
-    fetchData();
-  }, [flashcardId]);
 
   const handleCardClick = () => {
     setShowBack(!showBack);

@@ -77,6 +77,16 @@ export const loginUserAPI = async (email: string, password: string) => {
   }
 };
 
+export const getUserProgressAPI = async (courseId: number, userId: number) => {
+  try {
+    const res = await axios.get(`${URL}/user/progress/${courseId}/${userId}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch progress:", error);
+    return [];
+  }
+};
+
 export const getDefinitionAPI = async (searchTerm: string) => {
   try {
     const res = await axios.get(

@@ -32,6 +32,7 @@ const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
   const handleCancel = () => {
     setShowAll(false);
   };
+  // const handleJoin TODO
 
   return (
     <div className="all-courses-container">

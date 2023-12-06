@@ -1,6 +1,7 @@
 import { IModule } from "../../interfaces/IModule";
 
 type ModuleSidebarProps = {
+  progress: number;
   modules: IModule[];
   setModuleChosen: React.Dispatch<React.SetStateAction<number>>;
   setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
@@ -9,6 +10,7 @@ type ModuleSidebarProps = {
 };
 
 const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
+  progress,
   modules,
   setModuleChosen,
   setLessonChosen,
@@ -17,7 +19,7 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
 }) => {
   return (
     <>
-      {modules.map((module) => (
+      {modules.map((module, index) => (
         <div
           onClick={() => {
             setModuleChosen(module.id);
@@ -30,6 +32,7 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
           title={module.description}
         >
           <h2>{module.name}</h2>
+          {progress > index && <h3>Completed</h3>}
         </div>
       ))}
     </>

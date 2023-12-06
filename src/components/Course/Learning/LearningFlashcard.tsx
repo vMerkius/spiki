@@ -1,84 +1,45 @@
-import { useEffect, useState } from "react";
-import { IFlashcard } from "../../../interfaces/IFlashcard";
-import { getFlashcardAPI, getFlashcardWordsAPI } from "../../../server/server";
 import { IWord } from "../../../interfaces/IWord";
-import ArrowLeftIcon from "../../../../public/icons/arrow-left-icon.svg";
-import ArrowRightIcon from "../../../../public/icons/arrow-right-icon.svg";
+import SpeechRecognition from "../SpeechRecognition";
 
-type FlashcardsProps = {
-  flashcard: IFlashcard;
+type LearningFlashcardProps = {
+  word: IWord;
+  userValue: string;
+  setUserValue: React.Dispatch<React.SetStateAction<string>>;
 };
-const Flashcards: React.FC<FlashcardsProps> = ({ flashcard }) => {
-  const [words, setWords] = useState<IWord[]>([]);
-  const [current, setCurrent] = useState<number>(0);
-  const [showBack, setShowBack] = useState(true);
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleCardClick = () => {
-    setShowBack(!showBack);
-    setIsFlipped(!isFlipped);
+const LearningFlashcard: React.FC<LearningFlashcardProps> = ({
+  word,
+  userValue,
+  setUserValue,
+}) => {
+  const handleTranscript = (newTranscript: string) => {
+    setUserValue(newTranscript);
   };
-  const handlePrevClick = () => {
-    setCurrent(current - 1);
-    setIsFlipped(false);
-  };
-  const handleNextClick = () => {
-    setCurrent(current + 1);
-    setIsFlipped(false);
-  };
-
   return (
     <div>
-      <h1>{flashcard?.name}</h1>
-      <p>
-        Current: {current + 1} / {words.length}
-      </p>
-
       <div className="flashcard">
-        <button
-          className="arrow-btn arrow-btn--left"
-          onClick={handlePrevClick}
-          disabled={current === 0}
-        >
-          <img src={ArrowLeftIcon} alt="arrow left icon" width="30px" />
-        </button>
-        {words.length > 0 && (
-          <div
-            onClick={handleCardClick}
-            className={`flashcard__card ${
-              isFlipped ? "flashcard__card--flipped" : ""
-            }`}
-          >
-            {showBack ? (
-              <div>
-                <h2>{words[current].originalWord}</h2>
-              </div>
-            ) : words[current].imageUrl === "" ? (
-              <div>
-                <h2>{words[current].translatedWord}</h2>
-              </div>
-            ) : (
-              <>
-                <img
-                  width="200px"
-                  height="200px"
-                  src={words[current].imageUrl}
-                  alt="img"
-                />
-              </>
-            )}
-          </div>
-        )}
-        <button
-          className="arrow-btn arrow-btn--right"
-          onClick={handleNextClick}
-          disabled={current === words.length - 1}
-        >
-          <img src={ArrowRightIcon} alt="arrow right icon" width="30px" />
-        </button>
+        <div className={`flashcard__card  `}>
+          {word.imageUrl === "" ? (
+            <div>
+              <h2>{word.translatedWord}</h2>
+            </div>
+          ) : (
+            <>
+              <img width="200px" height="200px" src={word.imageUrl} alt="img" />
+            </>
+          )}
+        </div>
       </div>
+      <SpeechRecognition onTranscript={handleTranscript} />
+      <h3>Value:</h3>
+      <p>{userValue}</p>
+
+      {/* <input
+        type="text"
+        value={userValue}
+        onChange={(e) => setUserValue(e.target.value)}
+      /> */}
     </div>
   );
 };
 
-export default Flashcards;
+export default LearningFlashcard;

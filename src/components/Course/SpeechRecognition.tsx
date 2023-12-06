@@ -32,7 +32,7 @@ const SpeechRecognition: React.FC<SpeechRecognitionProps> = ({
       setIsListening(false);
     };
 
-    recognition.onresult = (event) => {
+    recognition.onresult = (event: any) => {
       console.log(event);
       const transcript = event.results[0][0].transcript;
       onTranscript(transcript);

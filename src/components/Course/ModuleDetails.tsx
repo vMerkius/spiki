@@ -9,7 +9,7 @@ import { IModule } from "../../interfaces/IModule";
 import Flashcards from "./Flashcards/Flashcards";
 import Lessons from "./Lessons/Lessons";
 import Quiz from "./Quiz/Quiz";
-import { useNavigate, useParams } from "react-router";
+import LearningMode from "./LearningMode";
 
 type ModuleDetailsProps = {
   moduleId: number;
@@ -19,6 +19,8 @@ type ModuleDetailsProps = {
   setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
   showQuiz: boolean;
   setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowLearningMode: React.Dispatch<React.SetStateAction<boolean>>;
+  showLearningMode: boolean;
 };
 
 const ModuleDetails: React.FC<ModuleDetailsProps> = ({
@@ -29,14 +31,12 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   setLessonChosen,
   showQuiz,
   setShowQuiz,
+  setShowLearningMode,
+  showLearningMode,
 }) => {
-  const value = useParams();
-  const { id, courseId } = value;
-  const navigate = useNavigate();
   const [module, setModule] = useState<IModule>();
   const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
   const [lessons, setLessons] = useState<IFlashcard[]>([]);
-  // const [showQuiz, setShowQuiz] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,11 +53,16 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
     <div className="module-details">
       {showQuiz ? (
         <Quiz setShowQuiz={setShowQuiz} moduleId={moduleId} />
+      ) : showLearningMode ? (
+        <LearningMode
+          setShowLearningMode={setShowLearningMode}
+          moduleId={moduleId}
+        ></LearningMode>
       ) : (
         <>
           <button
             onClick={() => {
-              navigate(`/user-courses/${id}/${courseId}/${moduleId}/learning`);
+              setShowLearningMode(true);
             }}
           >
             learning mode
@@ -79,12 +84,7 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
                   {flashcards.map((flashcard) => (
                     <div
                       key={flashcard.id}
-                      onClick={
-                        () => setFlashcardChosen(flashcard.id)
-                        // navigate(
-                        //   `/user-courses/1/1/${moduleId}/flashcards/${flashcard.id}`
-                        // )
-                      }
+                      onClick={() => setFlashcardChosen(flashcard.id)}
                     >
                       <h3>{flashcard.name}</h3>
                     </div>
@@ -95,10 +95,7 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
                   {lessons.map((lesson) => (
                     <div
                       key={lesson.id}
-                      onClick={() =>
-                        // navigate(`/user-courses/1/1/${moduleId}/lessons`)
-                        setLessonChosen(lesson.id)
-                      }
+                      onClick={() => setLessonChosen(lesson.id)}
                     >
                       <h3>{lesson.name}</h3>
                     </div>

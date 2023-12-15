@@ -2,8 +2,17 @@
 
 .quiz {
   position: relative;
+  height: 100vh;
 }
 
 .answer {
   color: c.$black;
+}
+
+.first-page-quiz {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

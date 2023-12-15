@@ -18,6 +18,7 @@ const CourseMainPage = () => {
   const [flashcardChosen, setFlashcardChosen] = useState<number>(-1);
   const [lessonChosen, setLessonChosen] = useState<number>(-1);
   const [showQuiz, setShowQuiz] = useState<boolean>(false);
+  const [showLearingMode, setShowLearningMode] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
@@ -55,6 +56,8 @@ const CourseMainPage = () => {
             moduleId={moduleChosen}
             showQuiz={showQuiz}
             setShowQuiz={setShowQuiz}
+            setShowLearningMode={setShowLearningMode}
+            showLearningMode={showLearingMode}
           ></ModuleDetails>
         )}
       </div>

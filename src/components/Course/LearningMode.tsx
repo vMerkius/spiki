@@ -7,9 +7,15 @@ import LearningSentence from "./Learning/LearningSentence";
 import { IAnswer } from "../../interfaces/IAnswer";
 import LearningQuestion from "./Learning/LearningQuestion";
 
-const LearningMode = () => {
-  const value = useParams();
-  const moduleId = Number(value.moduleId);
+type LearningModeProps = {
+  setShowLearningMode: React.Dispatch<React.SetStateAction<boolean>>;
+  moduleId: number;
+};
+
+const LearningMode: React.FC<LearningModeProps> = ({
+  moduleId,
+  setShowLearningMode,
+}) => {
   const [learningData, setLearningData] = useState<any>([]);
   const [allMaterialsQuantity, setAllMaterialsQuantity] = useState<number>(0);
   const [currentMaterial, setCurrentMaterial] = useState<number>(0);
@@ -56,51 +62,62 @@ const LearningMode = () => {
   }, [lifeState]);
 
   const handleNext = () => {
-    setCurrentMaterial((prev) => prev + 1);
-    switch (currentMaterial % 3) {
-      case 0:
-        if (
-          userValue.toLowerCase() ===
-          learningData.flashcards[currentFlashcard].originalWord.toLowerCase()
-        ) {
-          console.log("ok");
-        } else {
-          setLifeState((prev) => prev - 1);
-          console.log("nie ok");
-        }
-        setUserValue("");
-        setCurrentFlashcard((prev) => prev + 1);
-        break;
+    if (currentMaterial === allMaterialsQuantity - 1) {
+      alert("koniec");
+      return;
+    } else {
+      setCurrentMaterial((prev) => prev + 1);
+      switch (currentMaterial % 3) {
+        case 0:
+          if (
+            userValue.toLowerCase() ===
+            learningData.flashcards[currentFlashcard].originalWord.toLowerCase()
+          ) {
+            console.log("ok");
+          } else {
+            setLifeState((prev) => prev - 1);
+            console.log("nie ok");
+          }
+          setUserValue("");
+          setCurrentFlashcard((prev) => prev + 1);
+          break;
 
-      case 1:
-        console.log(userAnswer, learningData.quizQuestions[0].correctAnswer);
-        if (userAnswer === learningData.quizQuestions[0].correctAnswer) {
-          console.log("ok");
-        } else {
-          setLifeState((prev) => prev - 1);
-          console.log("nie ok");
-        }
-        setUserAnswer(0);
-        setCurrentQuizQuestion((prev) => prev + 1);
-        break;
-      case 2:
-        if (
-          userSentence.join(" ") ===
-          learningData.sentences[currentSentence].translated
-        ) {
-          console.log("ok");
-        } else {
-          setLifeState((prev) => prev - 1);
-          console.log("nie ok");
-        }
-        setCurrentSentence((prev) => prev + 1);
-        setUserSentence([]);
-        break;
+        case 1:
+          console.log(userAnswer, learningData.quizQuestions[0].correctAnswer);
+          if (userAnswer === learningData.quizQuestions[0].correctAnswer) {
+            console.log("ok");
+          } else {
+            setLifeState((prev) => prev - 1);
+            console.log("nie ok");
+          }
+          setUserAnswer(0);
+          setCurrentQuizQuestion((prev) => prev + 1);
+          break;
+        case 2:
+          if (
+            userSentence.join(" ") ===
+            learningData.sentences[currentSentence].translated
+          ) {
+            console.log("ok");
+          } else {
+            setLifeState((prev) => prev - 1);
+            console.log("nie ok");
+          }
+          setCurrentSentence((prev) => prev + 1);
+          setUserSentence([]);
+          break;
+      }
     }
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ position: "relative" }}>
+      <button
+        className="back-btn"
+        onClick={() => setShowLearningMode((prev) => !prev)}
+      >
+        Powrót
+      </button>
       <h2>
         {currentMaterial + 1}/{allMaterialsQuantity}
       </h2>

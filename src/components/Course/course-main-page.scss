@@ -1,4 +1,5 @@
 .course-page {
+  margin-top: 50px;
   display: flex;
 
   &__modules {
@@ -25,6 +26,8 @@
 }
 
 .module-details {
+  margin-top: 0;
+  background-color: #eee;
   li {
     color: black;
   }

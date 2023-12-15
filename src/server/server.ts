@@ -12,12 +12,36 @@ export const getUserByEmailAPI = async (email: string) => {
   }
 };
 
+export const joinCourseAPI = async (courseId: number, userId: number) => {
+  try {
+    const res = await axios.post(`${URL}/user/join/course`, null, {
+      params: { userId, courseId },
+    });
+    return res.status;
+  } catch (error) {
+    console.error("Failed to join course:", error);
+    return {};
+  }
+};
+
 export const getUserCoursesAPI = async (id: number) => {
   try {
     const res = await axios.get(`${URL}/user/courses/attended/${id}`);
     return res.data;
   } catch (error) {
     console.error("Failed to fetch user's courses:", error);
+    return {};
+  }
+};
+
+export const updateUserProgress = async (courseId: number, userId: number) => {
+  try {
+    const res = await axios.put(
+      `${URL}/user/progress/update/${courseId}/${userId}`
+    );
+    return res.status;
+  } catch (error) {
+    console.error("Failed to update progress:", error);
     return {};
   }
 };

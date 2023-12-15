@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getCoursesNonParticipatingAPI } from "../../server/server";
+import {
+  getCoursesNonParticipatingAPI,
+  joinCourseAPI,
+} from "../../server/server";
 import { ICourse } from "../../interfaces/ICourse";
 import { useParams } from "react-router";
 
@@ -32,7 +35,18 @@ const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
   const handleCancel = () => {
     setShowAll(false);
   };
-  // const handleJoin TODO
+
+  const handleJoin = async (courseId: number) => {
+    console.log(id, courseId);
+    const res = await joinCourseAPI(courseId, id);
+    if (res === 200) {
+      alert("Zostałeś dodany do kursu");
+
+      window.location.reload();
+    } else {
+      alert("Nie udało się dodać do kursu");
+    }
+  };
 
   return (
     <div className="all-courses-container">
@@ -49,7 +63,12 @@ const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
         />
         <ul>
           {filteredCourses.map((course) => (
-            <li key={course.id}>
+            <li
+              key={course.id}
+              onClick={() => {
+                handleJoin(course.id);
+              }}
+            >
               <p>
                 {course.language} - {course.level}
               </p>

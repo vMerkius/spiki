@@ -10,6 +10,8 @@ import Loading from "./components/shared/Loading";
 import Dictionary from "./components/Dictionary/Dictionary";
 import CourseMainPage from "./components/Course/CourseMainPage";
 import LearningMode from "./components/Course/LearningMode";
+import UserDetails from "./components/User/UserDetails/UserDetails";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -20,23 +22,30 @@ function App() {
         <Routes>
           <Route path="/" element={<UserForm />} />
           <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/user-courses/:id" element={<UserCourses />} />
+          <Route
+            path="/user-courses/:id"
+            element={
+              <ProtectedRoute>
+                <UserCourses />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/user-courses/:id/:courseId"
-            element={<CourseMainPage />}
+            element={
+              <ProtectedRoute>
+                <CourseMainPage />
+              </ProtectedRoute>
+            }
           />
           <Route
-            path="/user-courses/:id/:courseId/:moduleId/learning"
-            element={<LearningMode />}
+            path="user-details/:id"
+            element={
+              <ProtectedRoute>
+                <UserDetails />{" "}
+              </ProtectedRoute>
+            }
           />
-          {/* <Route
-            path="/user-courses/:id/:courseId/:moduleId/flashcards/:flashcardId"
-            element={<Flashcards />}
-          />
-          <Route
-            path="/user-courses/:id/:courseId/:moduleId/lessons"
-            element={<Lessons />}
-          /> */}
         </Routes>
       </div>
     </Router>

@@ -5,10 +5,13 @@ import {
   getModuleQuizAPI,
   getQuestionAnswersAPI,
   getQuizQuestionsAPI,
+  updateUserProgress,
 } from "../../../server/server";
 import { IAnswer } from "../../../interfaces/IAnswer";
 import "./quiz.scss";
 import { IQuiz } from "../../../interfaces/IQuiz";
+import { useParams } from "react-router";
+import FirstQuizPage from "./FirstQuizPage";
 
 type QuizProps = {
   setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +19,9 @@ type QuizProps = {
 };
 
 const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
+  const value = useParams();
+  const userId = Number(value.id);
+  const courseId = Number(value.courseId);
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [quiz, setQuiz] = useState<IQuiz>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -24,7 +30,8 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
   );
   const [answers, setAnswers] = useState<IAnswer[]>([]);
   const [userChoice, setUserChoice] = useState<number>(0);
-  const [correctAnswer, setCorrectAnswer] = useState<number>(0);
+  const [incorrectAnswer, setIncorrectAnswer] = useState<number>(3);
+  const [showFirstPage, setShowFirstPage] = useState<boolean>(true);
   useEffect(() => {
     const fetchData = async () => {
       const fetchedQuiz = await getModuleQuizAPI(moduleId);
@@ -71,8 +78,15 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
   const handleCheck = async () => {
     if (!currentQuestion) return;
     const asnwerCheck = await checkAnswerAPI(currentQuestion.id, userChoice);
-    if (asnwerCheck === 200) {
-      setCorrectAnswer((prev) => prev + 1);
+    if (asnwerCheck !== 200) {
+      setIncorrectAnswer((prev) => prev - 1);
+    }
+  };
+
+  const handleEnd = async () => {
+    if (incorrectAnswer > 0) {
+      const res = await updateUserProgress(courseId, userId);
+      console.log(res);
     }
   };
 
@@ -81,38 +95,53 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
       <button className="back-btn" onClick={() => setShowQuiz((prev) => !prev)}>
         Powrót
       </button>
-      <h1>{quiz?.name}</h1>
-      <h2>{quiz?.description}</h2>
-      <h2>
-        {currentQuestionIndex + 1}/{questions.length}
-      </h2>
-      <h2>
-        {correctAnswer}/{questions.length}
-      </h2>
-      {currentQuestion && (
-        <div key={currentQuestion.id}>
-          <h1>Pytanie:</h1>
-          <h2>{currentQuestion.description}</h2>
-          <form>
-            {answers.map((answer, index) => (
-              <div key={answer.id}>
-                <label>
-                  <input
-                    type="radio"
-                    value={index + 1}
-                    onChange={handleAnswerChange}
-                    checked={userChoice === index + 1}
-                  />
-                  <span className="answer">{answer.name}</span>
-                </label>
-              </div>
-            ))}
-          </form>
-          <button onClick={handleCheck}>Odpowiedz</button>
-          <button onClick={handlePreviousQuestion}>Poprzednie</button>
-          <button onClick={handleNextQuestion}>Nastepne</button>
-        </div>
+
+      {showFirstPage ? (
+        <FirstQuizPage
+          name={quiz?.name}
+          description={quiz?.description}
+          setShowFirstPage={setShowFirstPage}
+        />
+      ) : (
+        <>
+          <h2>
+            {currentQuestionIndex + 1}/{questions.length}
+          </h2>
+          <h2>
+            {incorrectAnswer}/{questions.length}
+          </h2>
+          {currentQuestion && (
+            <div key={currentQuestion.id}>
+              <h1>Pytanie:</h1>
+              <h2>{currentQuestion.description}</h2>
+              <form>
+                {answers.map((answer, index) => (
+                  <div key={answer.id}>
+                    <label>
+                      <input
+                        type="radio"
+                        value={index + 1}
+                        onChange={handleAnswerChange}
+                        checked={userChoice === index + 1}
+                      />
+                      <span className="answer">{answer.name}</span>
+                    </label>
+                  </div>
+                ))}
+              </form>
+              <button onClick={handleCheck}>Odpowiedz</button>
+              <button onClick={handlePreviousQuestion}>Poprzednie</button>
+              <button onClick={handleNextQuestion}>Nastepne</button>
+            </div>
+          )}
+          {currentQuestionIndex === questions.length - 1 && (
+            <button onClick={handleEnd}>end</button>
+          )}
+        </>
       )}
+
+      {/* <h1>{quiz?.name}</h1>
+      <h2>{quiz?.description}</h2> */}
     </div>
   );
 };

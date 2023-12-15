@@ -50,7 +50,7 @@ p {
 
 a {
   text-decoration: none;
-  color: c.$black;
+  // color: c.$black;
 }
 
 .error-info {
@@ -111,5 +111,24 @@ a {
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.navi-btn {
+  border: 1px solid c.$black;
+  background-color: c.$white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: c.$black;
+  overflow: hidden;
+  background-image: linear-gradient(to right, c.$black-back 50%, c.$white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.5s ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background-position: left bottom;
+    color: white;
   }
 }

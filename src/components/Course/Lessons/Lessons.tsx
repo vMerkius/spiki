@@ -6,9 +6,10 @@ import Subject from "./Subject";
 
 type LessonsProps = {
   lessonChosen: number;
+  setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Lessons: React.FC<LessonsProps> = ({ lessonChosen }) => {
+const Lessons: React.FC<LessonsProps> = ({ lessonChosen, setLessonChosen }) => {
   const [subjects, setSubjects] = useState<ISubject[]>([]);
   const [subjectChosen, setSubjectChosen] = useState<number>(-1);
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState<number>(-1);
@@ -22,7 +23,13 @@ const Lessons: React.FC<LessonsProps> = ({ lessonChosen }) => {
   }, []);
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {subjectChosen === -1 && (
+        <button className="back-btn" onClick={() => setLessonChosen(-1)}>
+          Powrót
+        </button>
+      )}
+
       {subjectChosen === -1 && <h1>Subjects</h1>}
 
       <div className="modules-container">

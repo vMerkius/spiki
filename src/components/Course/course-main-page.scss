@@ -1,44 +1,135 @@
+@use "../../colors.scss" as c;
+
 .course-page {
-  margin-top: 50px;
+  height: 100%;
   display: flex;
-
   &__modules {
+    height: 100%;
+    margin-right: 10px;
     flex: 1;
-    margin-top: 1rem;
-    &__tile {
-      background-color: #fff;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      padding: 10px 20px;
-      transition: all 0.3s ease-in-out;
+    &__tiles {
+      padding-top: 50px;
+      box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      &__tile {
+        display: flex;
+        align-items: flex-start;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        padding: 5px 25px;
+        transition: all 0.3s ease-in-out;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
 
-      &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
-        cursor: pointer;
+        &:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transform: translateY(-2px) scaleX(1.1);
+          cursor: pointer;
+          border: 2px solid c.$blue-back;
+        }
       }
     }
   }
   &__details {
-    flex: 3;
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid c.$blue-back;
+    flex: 4;
   }
 }
 
-.module-details {
-  margin-top: 0;
+.module-details-container {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 20px);
   background-color: #eee;
+  display: flex;
+  flex-direction: column;
+}
+.module-details {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  // margin-top: 0;
+  // background-color: #eee;
+
+  &__buttons {
+    height: 40%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    // position: absolute;
+    // bottom: 40px;
+    // right: 50%;
+    // transform: translateX(50%);
+    &__learning-btn {
+      font-size: 22px;
+      margin-top: 10px;
+      margin-left: 10px;
+      padding: 40px 60px;
+      border: 1px solid c.$blue-back;
+      background-color: transparent;
+      color: c.$blue-back;
+      border-radius: 4px;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        background-color: c.$blue-back;
+        color: #fff;
+      }
+    }
+
+    &__quiz-btn {
+      font-size: 22px;
+      margin-top: 10px;
+      margin-left: 10px;
+      padding: 40px 80px;
+      border: 1px solid c.$blue-back;
+      background-color: transparent;
+      color: c.$blue-back;
+      border-radius: 4px;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        background-color: c.$blue-back;
+        color: #fff;
+      }
+    }
+  }
   li {
     color: black;
   }
-  &__choice {
-    display: flex;
+  &__left {
+    height: 100%;
+    flex: 3;
+    margin: 20px;
+    &__choice {
+      display: flex;
+      flex-direction: column;
 
-    &__flashcards {
-      flex: 1;
+      &__flashcards {
+        flex: 1;
+      }
+      &__lessons {
+        flex: 1;
+      }
     }
-    &__lessons {
-      flex: 1;
-    }
+  }
+  &__right {
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: c.$gray;
+    height: 100%;
+    flex: 2;
   }
 }

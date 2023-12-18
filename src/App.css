@@ -6,6 +6,8 @@
 }
 
 .page-container {
+  background-color: rgb(181, 232, 232);
+  margin-top: 50px;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 50px);
 }

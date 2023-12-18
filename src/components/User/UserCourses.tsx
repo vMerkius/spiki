@@ -5,10 +5,6 @@ import { useNavigate, useParams } from "react-router";
 import "./user-courses.scss";
 import AllCourses from "./AllCourses";
 
-// type UserCoursesProps = {
-//   id: number;
-// };
-
 const UserCourses: React.FC = () => {
   const navigate = useNavigate();
   const value = useParams();
@@ -47,7 +43,7 @@ const UserCourses: React.FC = () => {
                   navigate("/user-courses/" + id + "/" + course.id);
                 }}
               >
-                Kontynuuj
+                Kontynuuj &rarr;
               </td>
             </tr>
           ))}

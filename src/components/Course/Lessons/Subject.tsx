@@ -45,7 +45,7 @@ const Subject: React.FC<SubjectProps> = ({
           setSubjectChosen(-1);
         }}
       >
-        Back
+        Powrót
       </button>
       <h1 className="subject__header">{subject?.name}</h1>
       <div className="subject__desc">

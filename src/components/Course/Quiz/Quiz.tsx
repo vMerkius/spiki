@@ -12,6 +12,7 @@ import "./quiz.scss";
 import { IQuiz } from "../../../interfaces/IQuiz";
 import { useParams } from "react-router";
 import FirstQuizPage from "./FirstQuizPage";
+import LifeIcons from "../LifeIcons";
 
 type QuizProps = {
   setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
@@ -107,9 +108,11 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
           <h2>
             {currentQuestionIndex + 1}/{questions.length}
           </h2>
-          <h2>
+          {/* <h2>
             {incorrectAnswer}/{questions.length}
-          </h2>
+          </h2> */}
+          <LifeIcons totalLives={3} currentLives={incorrectAnswer} />
+
           {currentQuestion && (
             <div key={currentQuestion.id}>
               <h1>Pytanie:</h1>

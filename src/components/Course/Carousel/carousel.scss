@@ -1,0 +1,51 @@
+@use "../../../colors.scss" as c;
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item-container {
+  padding: 20px;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.carousel-item {
+  color: c.$black;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  flex: 0 0 calc(33.3333% - 20px);
+  max-width: calc(33.3333% - 20px);
+  padding: 40px 10px;
+  margin: 0 10px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px) scaleX(1.1);
+    box-shadow: 0 4px 12px rgba(237, 162, 228, 0.7);
+    border: 2px solid c.$pink-hover;
+    cursor: pointer;
+  }
+}
+
+.carousel-button {
+  height: 40px;
+  width: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid c.$blue-back;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: c.$blue-back;
+    color: #fff;
+  }
+}

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IUserCreation } from "../interfaces/IUser";
+import { IReportCreation } from "../interfaces/IReport";
 const URL = "https://localhost:7275/api";
 
 export const getUserByEmailAPI = async (email: string) => {
@@ -249,6 +250,17 @@ export const getLearningAPI = async (id: number) => {
     return res.data;
   } catch (error) {
     console.error("Failed to fetch learning data:", error);
+    return {};
+  }
+};
+
+//Report
+export const addReportAPI = async (report: IReportCreation) => {
+  try {
+    const res = await axios.post(`${URL}/report`, report);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to add report:", error);
     return {};
   }
 };

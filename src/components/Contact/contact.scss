@@ -1,0 +1,40 @@
+@use "../../colors.scss" as c;
+.contact-form {
+  color: c.$black;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px 80px;
+  background-color: c.$white;
+  gap: 20px;
+  border-radius: 15px;
+  border: 2px solid c.$blue-back;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    &__choice {
+      padding: 3px;
+    }
+  }
+  &__submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: c.$black;
+    color: c.$white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      background-color: c.$white;
+      color: c.$black;
+      border: 2px solid c.$blue-buttons;
+    }
+  }
+}

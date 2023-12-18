@@ -12,6 +12,7 @@ import CourseMainPage from "./components/Course/CourseMainPage";
 import LearningMode from "./components/Course/LearningMode";
 import UserDetails from "./components/User/UserDetails/UserDetails";
 import ProtectedRoute from "./ProtectedRoute";
+import Contact from "./components/Contact/Contact";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </Router>

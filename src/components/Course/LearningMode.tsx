@@ -6,6 +6,7 @@ import LearningFlashcard from "./Learning/LearningFlashcard";
 import LearningSentence from "./Learning/LearningSentence";
 import { IAnswer } from "../../interfaces/IAnswer";
 import LearningQuestion from "./Learning/LearningQuestion";
+import LifeIcons from "./LifeIcons";
 
 type LearningModeProps = {
   setShowLearningMode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -123,6 +124,7 @@ const LearningMode: React.FC<LearningModeProps> = ({
       </h2>
       <h3>Zycia:</h3>
       <h1>{lifeState}/3</h1>
+      <LifeIcons totalLives={3} currentLives={lifeState} />
       {currentMaterial % 3 === 0 &&
         learningData.flashcards &&
         learningData.flashcards.length > currentFlashcard && (

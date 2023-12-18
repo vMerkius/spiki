@@ -69,7 +69,7 @@ const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
                 handleJoin(course.id);
               }}
             >
-              <p>
+              <p className="all-courses-container__window__course">
                 {course.language} - {course.level}
               </p>
             </li>

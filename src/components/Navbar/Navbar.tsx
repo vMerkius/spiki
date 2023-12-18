@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
     if (token) {
       console.log(token);
       const decode: any = jwtDecode(token);
+      console.log(decode);
       setId(decode.userId);
       setShowUser(true);
     }
@@ -74,7 +75,7 @@ const Navbar: React.FC = () => {
             </li>
           ) : (
             <li className="navbar__items__navi">
-              <Link to="/login">Login</Link>
+              <Link to="/">Login</Link>
             </li>
           )}
         </div>

@@ -1,14 +1,26 @@
 @use "../../colors.scss" as c;
 .user-courses {
+  background-color: c.$white;
+  padding: 10px 20px;
+  border: 2px solid c.$blue-back;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   &__table {
+    background-color: c.$white;
     margin-bottom: 20px;
     width: 30vw;
-    border: 1px solid c.$gray;
-    padding: 20px;
+    border: 2px solid c.$blue-back;
+    // box-shadow: 0 0 10px 0 c.$gray;
+    padding: 20px 10px;
+    border-radius: 20px;
 
     td,
     th {
@@ -16,12 +28,13 @@
     }
     &__row {
       &__level {
-        width: 40%;
+        width: 30%;
       }
       &__lang {
-        width: 60%;
+        width: 50%;
       }
       &__continue {
+        width: 20%;
         &:hover {
           cursor: pointer;
         }
@@ -29,9 +42,15 @@
     }
   }
   &__join {
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid c.$blue-back;
+    background-color: c.$white;
     padding: 10px;
-    border: none;
+    transition: background-color 1s ease;
+
     &:hover {
+      background-color: rgba(c.$blue-back, 0.8);
       cursor: pointer;
     }
   }
@@ -52,7 +71,7 @@
     transform: translate(-50%, -50%);
     border: 2px solid #777;
     background-color: #fff;
-    padding: 5px 20px 10px 20px;
+    padding: 10px 20px 10px 20px;
     border: 1px solid #000;
     &__input {
       width: 70%;
@@ -63,6 +82,11 @@
       padding: 0;
       li {
         margin: 0;
+      }
+    }
+    &__course {
+      &:hover {
+        cursor: pointer;
       }
     }
   }

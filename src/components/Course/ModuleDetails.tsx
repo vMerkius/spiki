@@ -129,7 +129,10 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
             </div>
           )}
           {flashcardChosen !== -1 && (
-            <Flashcards flashcardId={flashcardChosen}></Flashcards>
+            <Flashcards
+              flashcardId={flashcardChosen}
+              setFlashcardChosen={setFlashcardChosen}
+            ></Flashcards>
           )}
           {lessonChosen !== -1 && (
             <Lessons

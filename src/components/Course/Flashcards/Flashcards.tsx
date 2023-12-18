@@ -8,8 +8,12 @@ import "./flashcards.scss";
 
 type FlashcardsProps = {
   flashcardId: number;
+  setFlashcardChosen: React.Dispatch<React.SetStateAction<number>>;
 };
-const Flashcards: React.FC<FlashcardsProps> = ({ flashcardId }) => {
+const Flashcards: React.FC<FlashcardsProps> = ({
+  flashcardId,
+  setFlashcardChosen,
+}) => {
   const [flashcard, setFlashcard] = useState<IFlashcard>();
   const [words, setWords] = useState<IWord[]>([]);
   const [current, setCurrent] = useState<number>(0);
@@ -45,6 +49,9 @@ const Flashcards: React.FC<FlashcardsProps> = ({ flashcardId }) => {
       <p>
         Current: {current + 1} / {words.length}
       </p>
+      <button className="back-btn" onClick={() => setFlashcardChosen(-1)}>
+        Powrót
+      </button>
 
       <div className="flashcard">
         <button

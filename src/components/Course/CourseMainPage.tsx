@@ -46,7 +46,7 @@ const CourseMainPage = () => {
       </div>
       <div className="course-page__details">
         {moduleChosen === -1 ? (
-          <h1>Choose a module</h1>
+          <h1>Wybierz moduł</h1>
         ) : (
           <ModuleDetails
             lessonChosen={lessonChosen}

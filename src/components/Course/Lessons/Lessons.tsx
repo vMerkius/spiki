@@ -11,7 +11,7 @@ type LessonsProps = {
 
 const Lessons: React.FC<LessonsProps> = ({ lessonChosen, setLessonChosen }) => {
   const [subjects, setSubjects] = useState<ISubject[]>([]);
-  const [subjectChosen, setSubjectChosen] = useState<number>(-1);
+  const [subjectChosen, setSubjectChosen] = useState<number>(1);
   const [currentSubjectIndex, setCurrentSubjectIndex] = useState<number>(-1);
 
   useEffect(() => {

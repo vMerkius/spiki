@@ -30,14 +30,8 @@ const LearningFlashcard: React.FC<LearningFlashcardProps> = ({
         </div>
       </div>
       <SpeechRecognition onTranscript={handleTranscript} />
-      <h3>Value:</h3>
+      <h3>Wypowiedziane słowo:</h3>
       <p>{userValue}</p>
-
-      {/* <input
-        type="text"
-        value={userValue}
-        onChange={(e) => setUserValue(e.target.value)}
-      /> */}
     </div>
   );
 };

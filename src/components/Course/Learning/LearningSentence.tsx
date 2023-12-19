@@ -37,9 +37,9 @@ const LearningSentence: React.FC<LearningSentenceProps> = ({
     }
   };
   return (
-    <div>
+    <div className="words-container">
       <h2>{sentence.original}</h2>
-      <div className="words-container">
+      <div className="words-container__original">
         {translatedSentence.map((word, index) => (
           <div
             key={index}
@@ -50,7 +50,7 @@ const LearningSentence: React.FC<LearningSentenceProps> = ({
           </div>
         ))}
       </div>
-      <div className="words-sentence">
+      <div className="words-container__user">
         {userSentence.map((word, index) => (
           <div
             key={index}

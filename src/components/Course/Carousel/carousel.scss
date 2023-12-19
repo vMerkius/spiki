@@ -33,13 +33,15 @@
 }
 
 .carousel-button {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   font-size: 14px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid c.$blue-back;
+  border: 1px solid c.$black;
+  color: c.$black;
   background-color: transparent;
   cursor: pointer;
   border-radius: 50%;

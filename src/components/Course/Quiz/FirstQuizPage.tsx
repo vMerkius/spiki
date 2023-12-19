@@ -13,7 +13,9 @@ const FirstQuizPage: React.FC<FirstQuizPageProps> = ({
     <div className="first-page-quiz">
       <h1>{name}</h1>
       <h2>{description}</h2>
-      <button onClick={() => setShowFirstPage(false)}>Rozpocznij</button>
+      <button className="start-btn" onClick={() => setShowFirstPage(false)}>
+        Rozpocznij
+      </button>
     </div>
   );
 };

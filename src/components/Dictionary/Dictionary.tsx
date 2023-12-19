@@ -38,7 +38,9 @@ const Dictionary: React.FC = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="dictionary__search__submit" onClick={handleSearch}>
+          Wyszukaj
+        </button>
       </div>
       {definition.length === 0 ? (
         <h2>Wyszukaj słowo</h2>

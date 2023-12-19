@@ -16,7 +16,6 @@ const LearningQuestion: React.FC<LearningQuestionsProps> = ({
   setUserAnswer,
 }) => {
   console.log(answers);
-  const [correctAnswer, setCorrectAnswer] = useState<number>(0);
 
   const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserAnswer(Number(event.target.value));

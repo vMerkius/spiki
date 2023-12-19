@@ -1,16 +1,32 @@
+@use "../../../colors.scss" as c;
+
 .words-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__user {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  &__original {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
 
 .word-tile {
-  background-color: #777;
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background-color: c.$white;
+  color: c.$black;
+  padding: 5px 20px;
+  border: 1px solid c.$blue-back;
+  border-radius: 10px;
   &:hover {
-    background-color: #999;
     cursor: pointer;
+
+    background-color: c.$blue-back;
+    color: c.$white;
   }
 }

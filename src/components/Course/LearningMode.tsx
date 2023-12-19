@@ -112,7 +112,7 @@ const LearningMode: React.FC<LearningModeProps> = ({
   };
 
   return (
-    <div className="App" style={{ position: "relative" }}>
+    <div className="learning-mode">
       <button
         className="back-btn"
         onClick={() => setShowLearningMode((prev) => !prev)}
@@ -122,8 +122,6 @@ const LearningMode: React.FC<LearningModeProps> = ({
       <h2>
         {currentMaterial + 1}/{allMaterialsQuantity}
       </h2>
-      <h3>Zycia:</h3>
-      <h1>{lifeState}/3</h1>
       <LifeIcons totalLives={3} currentLives={lifeState} />
       {currentMaterial % 3 === 0 &&
         learningData.flashcards &&
@@ -153,30 +151,13 @@ const LearningMode: React.FC<LearningModeProps> = ({
             setUserSentence={setUserSentence}
           />
         )}
-
-      {/* {learningData.flashcards && (
-        <LearningFlashcard
-          word={learningData.flashcards[currentFlashcard]}
-          userValue={userValue}
-          setUserValue={setUserValue}
-        />
-      )} */}
-      {/* {learningData.sentences && (
-        <LearningSentence
-          sentence={learningData.sentences[currentSentence]}
-          userSentence={userSentence}
-          setUserSentence={setUserSentence}
-        />
-      )} */}
-      {/* {learningData.quizQuestions && (
-        <LearningQuestion
-          question={learningData.quizQuestions[0]}
-          answers={answers}
-          userAnswer={userAnswer}
-          setUserAnswer={setUserAnswer}
-        />
-      )} */}
-      <button onClick={handleNext}>Next</button>
+      <button
+        className="next-btn"
+        onClick={handleNext}
+        style={{ position: "absolute", left: "0", bottom: "0" }}
+      >
+        Następne
+      </button>
     </div>
   );
 };

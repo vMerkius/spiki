@@ -55,33 +55,26 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
     }
   }, [currentQuestion]);
 
-  const handleNextQuestion = () => {
-    const nextIndex = currentQuestionIndex + 1;
-    if (nextIndex < questions.length) {
-      setCurrentQuestionIndex(nextIndex);
-      setCurrentQuestion(questions[nextIndex]);
+  const handleNextQuestion = async () => {
+    if (userChoice === 0) {
+      alert("Wybierz odpowiedź");
+      return;
     }
-  };
-
-  const handlePreviousQuestion = () => {
-    const prevIndex = currentQuestionIndex - 1;
-    if (prevIndex >= 0) {
-      setCurrentQuestionIndex(prevIndex);
-      setCurrentQuestion(questions[prevIndex]);
-    }
-  };
-
-  const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserChoice(Number(event.target.value));
-    console.log(Number(event.target.value));
-  };
-
-  const handleCheck = async () => {
     if (!currentQuestion) return;
     const asnwerCheck = await checkAnswerAPI(currentQuestion.id, userChoice);
     if (asnwerCheck !== 200) {
       setIncorrectAnswer((prev) => prev - 1);
     }
+    const nextIndex = currentQuestionIndex + 1;
+    if (nextIndex < questions.length) {
+      setCurrentQuestionIndex(nextIndex);
+      setCurrentQuestion(questions[nextIndex]);
+    }
+    setUserChoice(0);
+  };
+
+  const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserChoice(Number(event.target.value));
   };
 
   const handleEnd = async () => {
@@ -104,23 +97,20 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
           setShowFirstPage={setShowFirstPage}
         />
       ) : (
-        <>
+        <div className="quiz__question">
+          <h1>Pytanie:</h1>
           <h2>
             {currentQuestionIndex + 1}/{questions.length}
           </h2>
-          {/* <h2>
-            {incorrectAnswer}/{questions.length}
-          </h2> */}
           <LifeIcons totalLives={3} currentLives={incorrectAnswer} />
 
           {currentQuestion && (
-            <div key={currentQuestion.id}>
-              <h1>Pytanie:</h1>
+            <div className="quiz__question__data" key={currentQuestion.id}>
               <h2>{currentQuestion.description}</h2>
               <form>
                 {answers.map((answer, index) => (
                   <div key={answer.id}>
-                    <label>
+                    <label className="quiz__question__data__answer">
                       <input
                         type="radio"
                         value={index + 1}
@@ -132,19 +122,19 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
                   </div>
                 ))}
               </form>
-              <button onClick={handleCheck}>Odpowiedz</button>
-              <button onClick={handlePreviousQuestion}>Poprzednie</button>
-              <button onClick={handleNextQuestion}>Nastepne</button>
+              {currentQuestionIndex !== questions.length - 1 ? (
+                <button className="next-btn" onClick={handleNextQuestion}>
+                  Nastepne
+                </button>
+              ) : (
+                <button className="end-btn" onClick={handleEnd}>
+                  end
+                </button>
+              )}
             </div>
           )}
-          {currentQuestionIndex === questions.length - 1 && (
-            <button onClick={handleEnd}>end</button>
-          )}
-        </>
+        </div>
       )}
-
-      {/* <h1>{quiz?.name}</h1>
-      <h2>{quiz?.description}</h2> */}
     </div>
   );
 };

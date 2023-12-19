@@ -132,3 +132,58 @@ a {
     color: white;
   }
 }
+
+.next-btn {
+  width: 100%;
+  border: 1px solid c.$black;
+  background-color: c.$white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: c.$black;
+  overflow: hidden;
+  background-size: 200% 100%;
+  transition: background-position 0.5s ease-out;
+  cursor: pointer;
+  background-image: linear-gradient(to right, c.$green-btn 50%, c.$white 50%);
+  background-position: right bottom;
+
+  &:hover {
+    background-position: left bottom;
+    background-color: c.$green-btn;
+  }
+}
+
+.end-btn {
+  width: 100%;
+  border: 1px solid c.$black;
+  background-color: rgba(c.$light-red, 0.7);
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: c.$black;
+  overflow: hidden;
+  background-size: 200% 100%;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+
+  &:hover {
+    background-color: c.$light-red;
+    scale: 1.1;
+  }
+}
+
+.start-btn {
+  border: 1px solid c.$black;
+  background-color: rgba(c.$blue-back, 0.7);
+  border-radius: 5px;
+  padding: 30px 60px;
+  color: c.$black;
+  overflow: hidden;
+  background-size: 200% 100%;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+
+  &:hover {
+    background-color: c.$green-btn;
+    scale: 1.1;
+  }
+}

@@ -23,22 +23,21 @@ const Lessons: React.FC<LessonsProps> = ({ lessonChosen, setLessonChosen }) => {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", height: "100%" }}>
       {subjectChosen === -1 && (
         <button className="back-btn" onClick={() => setLessonChosen(-1)}>
           Powrót
         </button>
       )}
 
-      {subjectChosen === -1 && <h1>Subjects</h1>}
+      {subjectChosen === -1 && <h1>Tematy</h1>}
 
       <div className="modules-container">
         {subjectChosen === -1 ? (
           <>
-            {subjects.map((subject) => (
+            {subjects.map((subject, index) => (
               <div key={subject.id}>
                 <div
-                  className="modules-container__tile"
                   onClick={() => {
                     setSubjectChosen(subject.id);
                     setCurrentSubjectIndex(
@@ -46,9 +45,9 @@ const Lessons: React.FC<LessonsProps> = ({ lessonChosen, setLessonChosen }) => {
                     );
                   }}
                 >
-                  <div className="modules-container__tile--upper">
-                    <h3>{subject.name}</h3>
-                  </div>
+                  <p className="modules-container__subject">
+                    <strong>{index + 1}.</strong> {subject.name}
+                  </p>
                 </div>
               </div>
             ))}
@@ -61,6 +60,7 @@ const Lessons: React.FC<LessonsProps> = ({ lessonChosen, setLessonChosen }) => {
               subjects={subjects}
               setSubjectChosen={setSubjectChosen}
               subjectId={subjectChosen}
+              setLessonChosen={setLessonChosen}
             ></Subject>
           </>
         )}

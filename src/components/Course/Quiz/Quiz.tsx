@@ -13,6 +13,7 @@ import { IQuiz } from "../../../interfaces/IQuiz";
 import { useParams } from "react-router";
 import FirstQuizPage from "./FirstQuizPage";
 import LifeIcons from "../LifeIcons";
+import ProgressBar from "../../shared/ProgressBar";
 
 type QuizProps = {
   setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
@@ -78,14 +79,30 @@ const Quiz: React.FC<QuizProps> = ({ setShowQuiz, moduleId }) => {
   };
 
   const handleEnd = async () => {
+    if (userChoice === 0) {
+      alert("Wybierz odpowiedź");
+      return;
+    }
     if (incorrectAnswer > 0) {
       const res = await updateUserProgress(courseId, userId);
       console.log(res);
+      alert("Gratulacje");
+      setShowQuiz((prev) => !prev);
+    } else {
+      alert("Nie udało się");
+      setShowQuiz((prev) => !prev);
     }
   };
 
   return (
     <div className="quiz">
+      {!showFirstPage && (
+        <ProgressBar
+          currentValue={currentQuestionIndex + 1}
+          totalValue={questions.length}
+        ></ProgressBar>
+      )}
+
       <button className="back-btn" onClick={() => setShowQuiz((prev) => !prev)}>
         Powrót
       </button>

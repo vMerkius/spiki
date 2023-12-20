@@ -9,7 +9,7 @@ import { IModule } from "../../interfaces/IModule";
 import Flashcards from "./Flashcards/Flashcards";
 import Lessons from "./Lessons/Lessons";
 import Quiz from "./Quiz/Quiz";
-import LearningMode from "./LearningMode";
+import LearningMode from "./Learning/LearningMode";
 import Carousel from "./Carousel/Carousel";
 
 type ModuleDetailsProps = {

@@ -15,9 +15,11 @@ const LearningFlashcard: React.FC<LearningFlashcardProps> = ({
     setUserValue(newTranscript);
   };
   return (
-    <div>
-      <div className="flashcard">
-        <div className={`flashcard__card  `}>
+    <div className="learning-flashcard">
+      <h1>Wypowiedz odpowiednie słowo</h1>
+
+      <div className="learning-flashcard__flashcard">
+        <div className={`learning-flashcard__flashcard__card  `}>
           {word.imageUrl === "" ? (
             <div>
               <h2>{word.translatedWord}</h2>

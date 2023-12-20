@@ -8,6 +8,7 @@ import { IModule } from "../../interfaces/IModule";
 import "./course-main-page.scss";
 import ModuleDetails from "./ModuleDetails";
 import ModuleSidebar from "./ModuleSidebar";
+import Chat from "../Chat/Chat";
 
 const CourseMainPage = () => {
   const value = useParams();
@@ -33,6 +34,8 @@ const CourseMainPage = () => {
 
   return (
     <div className="course-page">
+      <Chat></Chat>
+
       <div className="course-page__modules">
         {!modules && <h2>No modules</h2>}
         <ModuleSidebar

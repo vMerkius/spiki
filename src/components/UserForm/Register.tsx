@@ -14,7 +14,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
     dateOfBirth: "",
-    gender: "",
+    gender: "M",
     country: "",
     imageUrl: "",
   });
@@ -26,7 +26,6 @@ const Register = () => {
       ...registerData,
       [event.target.name]: event.target.value,
     });
-    console.log(registerData);
     if (event.target.name === "password") {
       if (!event.target.value.match(regex)) {
         setPasswordError(
@@ -49,6 +48,8 @@ const Register = () => {
     }
   };
   const handleRegister = async () => {
+    console.log(registerData);
+
     if (
       passwordError ||
       confirmPasswordError ||

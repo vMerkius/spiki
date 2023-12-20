@@ -30,3 +30,46 @@
     color: c.$white;
   }
 }
+
+.learning-flashcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  h1 {
+    margin: 0;
+  }
+  &__word {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  &__translation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  &__flashcard {
+    min-height: 300px;
+    min-width: 300px;
+    margin: 0;
+    padding: 0;
+
+    &__card {
+      background-color: #fff;
+      border: 1px solid rgba(c.$gray, 0.4);
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      padding: 80px 20px;
+    }
+  }
+}
+
+.learning-quiz {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

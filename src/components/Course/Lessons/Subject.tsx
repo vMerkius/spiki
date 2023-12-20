@@ -9,6 +9,7 @@ type SubjectProps = {
   setcurrentSubjectIndex: React.Dispatch<React.SetStateAction<number>>;
   subjects: ISubject[];
   setSubjectChosen: React.Dispatch<React.SetStateAction<number>>;
+  setLessonChosen: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Subject: React.FC<SubjectProps> = ({
@@ -17,6 +18,7 @@ const Subject: React.FC<SubjectProps> = ({
   setcurrentSubjectIndex,
   subjects,
   setSubjectChosen,
+  setLessonChosen,
 }) => {
   const [subject, setSubject] = useState<ISubject>();
   useEffect(() => {
@@ -40,9 +42,23 @@ const Subject: React.FC<SubjectProps> = ({
   return (
     <div className="subject">
       <button
+        style={{
+          height: "30px",
+          top: "100%",
+          left: "50%",
+          transform: "translate(-50%, -100%)",
+        }}
         className="back-btn"
         onClick={() => {
           setSubjectChosen(-1);
+        }}
+      >
+        Wszystkie tematy
+      </button>
+      <button
+        className="back-btn"
+        onClick={() => {
+          setLessonChosen(-1);
         }}
       >
         Powrót

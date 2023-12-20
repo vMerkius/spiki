@@ -3,39 +3,16 @@
 .modules-container {
   display: flex;
   flex-wrap: wrap;
-
-  &__tile {
-    position: relative;
-    flex: 1;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  &__subject {
+    font-size: 20px;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-
-    &:hover {
-      border: 2px solid #e2630e;
-    }
-
-    h3 {
-      margin: 0;
-      color: #000;
-    }
-
-    &--upper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #8fcadd;
-      padding: 3px 55px;
-    }
-
-    &--bottom {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fff;
-      padding: 15px 40px;
+    margin: 10px;
+    color: c.$black;
+    &__hover {
+      text-decoration: underline;
     }
   }
 }
@@ -43,16 +20,13 @@
 .subject {
   position: relative;
 
-  width: 50vw;
-  height: 50vh;
+  width: 80%;
+  height: 80%;
+  margin: auto auto;
   flex-wrap: wrap;
-  margin: 10px auto;
   border: 1px solid #ccc;
   border-radius: 5px;
-
-  &:hover {
-    border: 2px solid #e2630e;
-  }
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 
   &__desc {
     width: 100%;

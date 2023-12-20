@@ -13,6 +13,16 @@ export const getUserByEmailAPI = async (email: string) => {
   }
 };
 
+export const getUserAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/user/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return {};
+  }
+};
+
 export const joinCourseAPI = async (courseId: number, userId: number) => {
   try {
     const res = await axios.post(`${URL}/user/join/course`, null, {

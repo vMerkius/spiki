@@ -1,4 +1,6 @@
 import { IModule } from "../../interfaces/IModule";
+import stargood from "../../assets/star-good.png";
+import starbad from "../../assets/star-bad.png";
 
 type ModuleSidebarProps = {
   progress: number;
@@ -17,6 +19,8 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
   setFlashcardChosen,
   setShowQuiz,
 }) => {
+  console.log(progress);
+
   return (
     <div className="course-page__modules__tiles">
       {modules.map((module, index) => (
@@ -32,7 +36,21 @@ const ModuleSidebar: React.FC<ModuleSidebarProps> = ({
           title={module.description}
         >
           <h2>{module.name}</h2>
-          {progress > index && <h3>Completed</h3>}
+          {progress > index ? (
+            <img
+              className="course-page__modules__tiles__tile__img"
+              src={stargood}
+              alt="star"
+              width="50px"
+            />
+          ) : (
+            <img
+              className="course-page__modules__tiles__tile__img"
+              src={starbad}
+              alt="star"
+              width="50px"
+            />
+          )}
         </div>
       ))}
     </div>

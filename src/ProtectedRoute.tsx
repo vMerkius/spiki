@@ -1,23 +1,35 @@
 import { jwtDecode } from "jwt-decode";
 import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
 };
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const value = useParams();
-  const id = value.id;
-  const isAuth = localStorage.getItem("token");
-  // let decode: any = null;
-  // if (isAuth) {
-  //   decode = jwtDecode(isAuth);
-  // }
+  const token = localStorage.getItem("token");
 
-  // console.log(decode.userId, id);
-  // return isAuth && decode.userId === id ? children : <Navigate to="/" />;
-  return isAuth ? children : <Navigate to="/" />;
+  if (token) {
+    let isTokenValid = false;
+    try {
+      const decoded: { exp: number } = jwtDecode(token);
+      const currentTimestamp = Date.now() / 1000;
+      if (decoded.exp > currentTimestamp) {
+        isTokenValid = true;
+      }
+    } catch (error) {
+      console.error("Token decoding error:", error);
+    }
+
+    if (!isTokenValid) {
+      localStorage.removeItem("token");
+      return <Navigate to="/login" />;
+    }
+  } else {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;

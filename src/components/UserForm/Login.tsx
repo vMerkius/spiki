@@ -22,8 +22,9 @@ const Login = () => {
       console.log(decode);
 
       localStorage.setItem("token", response);
-      // navigate(`/user-courses/${decode.userId}`);
-      navigate(`/user-courses/1`);
+      console.log(decode.userId);
+      navigate(`/user-courses/${decode.userId}`);
+      // navigate(`/user-courses/1`);
     } catch (error) {
       console.error("Błąd logowania", error);
       alert("Niepoprawny email lub hasło.");

@@ -1,0 +1,22 @@
+@use "../../colors.scss" as c;
+
+.progress-bar {
+  background-color: c.$white;
+  color: c.$black;
+  border: 1px solid c.$black;
+  width: 50%;
+  position: absolute;
+  top: 10px;
+  right: 50%;
+  transform: translate(50%, 0%);
+  &__item {
+    height: 25px;
+    border-right: 1px solid c.$black;
+    &__value {
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  }
+}

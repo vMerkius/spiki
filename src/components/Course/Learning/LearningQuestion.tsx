@@ -31,9 +31,9 @@ const LearningQuestion: React.FC<LearningQuestionsProps> = ({
   // };
 
   return (
-    <div className="quiz">
+    <div className="learning-quiz">
       <div>
-        <h1>Pytanie:</h1>
+        <h1>Wybierz jedną poprawną odpowiedź</h1>
         <h2>{question.description}</h2>
         <form>
           {answers.map((answer, index) => (

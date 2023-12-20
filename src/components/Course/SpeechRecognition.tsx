@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import mic from "../../assets/microphone.svg";
+import micoff from "../../assets/microphone-off.svg";
 
 declare const window: any;
 
@@ -51,8 +53,23 @@ const SpeechRecognition: React.FC<SpeechRecognitionProps> = ({
 
   return (
     <div>
-      <button onClick={() => setIsListening((prevState) => !prevState)}>
-        {isListening ? "Stop Listening" : "Start Listening"}
+      <button
+        style={{ cursor: "pointer" }}
+        onClick={() => setIsListening((prevState) => !prevState)}
+      >
+        {isListening ? (
+          <img
+            src={micoff}
+            alt="microphone"
+            style={{ width: "25px", height: "25px" }}
+          />
+        ) : (
+          <img
+            src={mic}
+            alt="microphone"
+            style={{ width: "25px", height: "25px" }}
+          />
+        )}
       </button>
     </div>
   );

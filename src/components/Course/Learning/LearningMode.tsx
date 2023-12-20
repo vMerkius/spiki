@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import SpeechRecognition from "./SpeechRecognition";
+import SpeechRecognition from "../SpeechRecognition";
 import { useParams } from "react-router";
-import { getLearningAPI, getQuestionAnswersAPI } from "../../server/server";
-import LearningFlashcard from "./Learning/LearningFlashcard";
-import LearningSentence from "./Learning/LearningSentence";
-import { IAnswer } from "../../interfaces/IAnswer";
-import LearningQuestion from "./Learning/LearningQuestion";
-import LifeIcons from "./LifeIcons";
+import { getLearningAPI, getQuestionAnswersAPI } from "../../../server/server";
+import LearningFlashcard from "./LearningFlashcard";
+import LearningSentence from "./LearningSentence";
+import { IAnswer } from "../../../interfaces/IAnswer";
+import LearningQuestion from "./LearningQuestion";
+import LifeIcons from "../LifeIcons";
+import ProgressBar from "../../shared/ProgressBar";
+import "./learning-mode.scss";
 
 type LearningModeProps = {
   setShowLearningMode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -59,12 +61,14 @@ const LearningMode: React.FC<LearningModeProps> = ({
   useEffect(() => {
     if (lifeState === 0) {
       alert("koniec");
+      setShowLearningMode((prev) => !prev);
     }
   }, [lifeState]);
 
   const handleNext = () => {
     if (currentMaterial === allMaterialsQuantity - 1) {
       alert("koniec");
+
       return;
     } else {
       setCurrentMaterial((prev) => prev + 1);
@@ -113,15 +117,19 @@ const LearningMode: React.FC<LearningModeProps> = ({
 
   return (
     <div className="learning-mode">
+      <ProgressBar
+        currentValue={currentMaterial + 1}
+        totalValue={allMaterialsQuantity}
+      />
       <button
         className="back-btn"
         onClick={() => setShowLearningMode((prev) => !prev)}
       >
         Powrót
       </button>
-      <h2>
+      {/* <h2>
         {currentMaterial + 1}/{allMaterialsQuantity}
-      </h2>
+      </h2> */}
       <LifeIcons totalLives={3} currentLives={lifeState} />
       {currentMaterial % 3 === 0 &&
         learningData.flashcards &&
@@ -154,7 +162,13 @@ const LearningMode: React.FC<LearningModeProps> = ({
       <button
         className="next-btn"
         onClick={handleNext}
-        style={{ position: "absolute", left: "0", bottom: "0" }}
+        style={{
+          width: "100px",
+          position: "absolute",
+          left: "50%",
+          bottom: "20px",
+          transform: "translate(-50%, 0)",
+        }}
       >
         Następne
       </button>

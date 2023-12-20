@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import "./user-form.scss";
+import Chat from "../Chat/Chat";
 
 const UserForm: React.FC = () => {
   const [loggingIn, setLoggingIn] = useState(true);
-  const handleLogin = () => {
-    return;
-  };
-  const handleRegister = () => {
-    return;
-  };
-
   return (
     <div className="logging">
       <div

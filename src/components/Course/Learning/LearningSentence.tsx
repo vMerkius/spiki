@@ -38,6 +38,7 @@ const LearningSentence: React.FC<LearningSentenceProps> = ({
   };
   return (
     <div className="words-container">
+      <h1>Ułóż poniższe zdanie w odpowiedniej kolejności</h1>
       <h2>{sentence.original}</h2>
       <div className="words-container__original">
         {translatedSentence.map((word, index) => (

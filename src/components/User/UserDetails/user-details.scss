@@ -1,0 +1,62 @@
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1,
+  h2 {
+    margin: 0;
+  }
+
+  &__main {
+    padding: 10px 12px;
+    background-color: #cbe6ef;
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    p {
+      color: #000;
+    }
+    img {
+      border: 3px solid #8fcadd;
+      margin-left: 50px;
+    }
+
+    &__info {
+      margin-top: 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      &__sections {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+    }
+  }
+
+  &__courses {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+
+    &__item {
+      border: 1px solid #777;
+      padding: 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: #cbe6ef;
+      }
+      &__navi {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

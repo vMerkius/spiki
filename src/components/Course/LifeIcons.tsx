@@ -1,4 +1,5 @@
 import "./life-icons.scss";
+import life from "../../assets/heart-1.png";
 
 type LifeIconProps = {
   isActive: boolean;
@@ -7,7 +8,16 @@ type LifeIconProps = {
 const LifeIcon: React.FC<LifeIconProps> = ({ isActive }) => {
   return (
     <div className="lifes-container__single">
-      {isActive ? <h1>jest</h1> : <h1>nie ma</h1>}
+      {isActive ? (
+        <img
+          className="lifes-container__single__img"
+          src={life}
+          alt="life"
+          width="50px"
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

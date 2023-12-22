@@ -6,29 +6,9 @@
   top: 0;
   left: 0;
   right: 0;
-  // border-bottom: 1px solid c.$gray;
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.22);
   position: fixed;
   z-index: 1;
-
-  // top: 0;
-  // border-bottom: 1px solid c.$gray;
-  // position: relative;
-
-  // &__bottom {
-  //   width: 30%;
-  //   height: 20px;
-  //   border-bottom-left-radius: 10px;
-  //   border-bottom-right-radius: 10px;
-  //   background-color: c.$black;
-  //   position: absolute;
-  //   top: 100%;
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   // border-bottom: 1px solid c.$gray;
-  //   // border-right: 1px solid c.$gray;
-  //   // border-left: 1px solid c.$gray;
-  // }
 
   &__items {
     height: 100%;

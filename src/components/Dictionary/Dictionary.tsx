@@ -15,7 +15,6 @@ const Dictionary: React.FC = () => {
   const handleSearch = async () => {
     const response = await getDefinitionAPI(searchTerm);
     setDefinition(response);
-    console.log(response);
   };
 
   return (
@@ -39,12 +38,17 @@ const Dictionary: React.FC = () => {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
         <button className="dictionary__search__submit" onClick={handleSearch}>
           Wyszukaj
         </button>
       </div>
-      {definition.length !== 0 && (
+      {definition.length !== 0 ? (
         <>
           <p>{definition[0].phonetic}</p>
 
@@ -60,6 +64,8 @@ const Dictionary: React.FC = () => {
             )}
           </div>
         </>
+      ) : (
+        <p>Brak definicji</p>
       )}
     </div>
   );

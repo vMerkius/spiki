@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { addUserAPI } from "../../server/server";
+import CountryDropdown from "./CountryDropdown";
 
 const genders = ["M", "W"];
 const Register = () => {
@@ -116,14 +117,10 @@ const Register = () => {
             ))}
           </select>
 
-          <input
-            className="form-display__input"
-            type="text"
-            name="country"
+          <CountryDropdown
             value={registerData.country}
             onChange={handleChange}
-            placeholder="Kraj"
-          />
+          ></CountryDropdown>
         </form>
       ) : (
         <form className="form-display">

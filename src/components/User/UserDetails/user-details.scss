@@ -1,3 +1,5 @@
+@use "../../../colors.scss" as c;
+
 .user-details-container {
   display: flex;
   flex-direction: column;
@@ -10,13 +12,14 @@
   }
 
   &__main {
-    // padding: 10px 12px;
-    background-color: #cbe6ef;
+    padding: 10px 12px;
+    background-color: c.$white;
     margin-top: 20px;
     display: flex;
-    width: 100%;
+    width: 80%;
     align-items: flex-start;
     justify-content: space-between;
+    border: 2px solid c.$blue-btn2;
 
     p {
       color: #000;
@@ -42,20 +45,26 @@
   }
 
   &__courses {
+    background-color: c.$white;
+    width: 60%;
+    border: 2px solid c.$blue-btn2;
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-
-    &__item {
-      border: 1px solid #777;
-      padding: 10px;
-      &:hover {
-        cursor: pointer;
-        background-color: #cbe6ef;
-      }
-      &__navi {
+    display: flex;
+    flex-direction: column;
+    &__list {
+      &__item {
+        list-style: none;
+        padding: 10px;
         &:hover {
-          text-decoration: underline;
+          cursor: pointer;
+          background-color: #cbe6ef;
+        }
+        &__navi {
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }

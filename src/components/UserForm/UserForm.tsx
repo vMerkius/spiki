@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import "./user-form.scss";
-import Chat from "../Chat/Chat";
+import { jwtDecode } from "jwt-decode";
 
 const UserForm: React.FC = () => {
   const [loggingIn, setLoggingIn] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token === null) return;
+    const decodedToken: any = jwtDecode(token!);
+    const id = decodedToken.userId;
+    if (id > 0) {
+      window.location.href = `/user-courses/${id}`;
+    }
+  }, []);
   return (
     <div className="logging">
       <div

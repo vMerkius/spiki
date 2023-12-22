@@ -84,7 +84,7 @@ const UserDetails = () => {
           </div>
           <button
             onClick={() => {
-              setChangePassword(true);
+              setChangePassword(!changePassword);
             }}
           >
             Zmień hasło
@@ -99,23 +99,25 @@ const UserDetails = () => {
           )}
         </div>
       </div>
-      <h1>Kursy:</h1>
-      <ul className="user-details-container__courses">
-        {userCourses.map((course) => (
-          <li
-            key={course.id}
-            title="Course details"
-            onClick={() => {
-              navigate(`/courses/${course.id}`);
-            }}
-            className="user-details-container__courses__item"
-          >
-            <h2 className="user-details-container__courses__item__navi">
-              {course.language}-{course.level}
-            </h2>
-          </li>
-        ))}
-      </ul>
+      <div className="user-details-container__courses">
+        <h1>Kursy:</h1>
+        <ul className="user-details-container__courses__list">
+          {userCourses.map((course) => (
+            <li
+              key={course.id}
+              title="Course details"
+              onClick={() => {
+                navigate(`/courses/${course.id}`);
+              }}
+              className="user-details-container__courses__list__item"
+            >
+              <h2 className="user-details-container__courses__list__item__navi">
+                {course.language} - {course.level}
+              </h2>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

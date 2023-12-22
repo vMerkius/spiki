@@ -23,10 +23,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
     if (!isTokenValid) {
       localStorage.removeItem("token");
-      return <Navigate to="/login" />;
+      return <Navigate to="/" />;
     }
   } else {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return children;

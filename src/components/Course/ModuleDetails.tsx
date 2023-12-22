@@ -44,7 +44,6 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   const [lessons, setLessons] = useState<IFlashcard[]>([]);
   const moduleIndex = modules.findIndex((module) => module.id === moduleId) + 1;
   const canQuiz = progress < moduleIndex ? true : false;
-  console.log(canQuiz, progress, moduleIndex);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +59,7 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   return (
     <div className="module-details-container">
       {showQuiz ? (
-        <Quiz setShowQuiz={setShowQuiz} moduleId={moduleId} />
+        <Quiz setShowQuiz={setShowQuiz} moduleId={moduleId} canQuiz={canQuiz} />
       ) : showLearningMode ? (
         <LearningMode
           setShowLearningMode={setShowLearningMode}
@@ -80,14 +79,6 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
                       setFlashcardChosen={setFlashcardChosen}
                       setLessonChosen={setLessonChosen}
                     />
-                    {/* {lessons.map((lesson) => (
-                    <div
-                      key={lesson.id}
-                      onClick={() => setLessonChosen(lesson.id)}
-                    >
-                      <h3>{lesson.name}</h3>
-                    </div>
-                  ))} */}
                   </div>
                   <div className="module-details__left__choice__flashcards">
                     <h2>Fiszki</h2>
@@ -97,14 +88,6 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
                       setFlashcardChosen={setFlashcardChosen}
                       setLessonChosen={setLessonChosen}
                     />
-                    {/* {flashcards.map((flashcard) => (
-                    <div
-                      key={flashcard.id}
-                      onClick={() => setFlashcardChosen(flashcard.id)}
-                    >
-                      <h3>{flashcard.name}</h3>
-                    </div>
-                  ))} */}
                   </div>
                 </div>
               </div>
@@ -128,10 +111,7 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
               <button
                 className="module-details__buttons__quiz-btn"
                 onClick={() => {
-                  if (canQuiz) setShowQuiz(true);
-                  else {
-                    alert("Nie możesz wypełnić quizu kolejny raz");
-                  }
+                  setShowQuiz(true);
                 }}
               >
                 Zakończ moduł i wypełnij quiz!

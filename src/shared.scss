@@ -22,27 +22,21 @@ p {
 
 .btn-submit {
   width: 70%;
-  background-color: c.$black;
+  background-color: c.$blue-btn2;
   color: c.$white;
   border: none;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
+  transition: 0.5s ease-out;
 
-  &--login {
-    color: c.$white;
-    background-color: c.$blue-btn2;
-    border-radius: 20px;
-
-    &:hover {
-      background-color: rgba(c.$blue-btn2, 0.9);
-    }
+  &:hover {
+    background-color: rgba(c.$blue-btn2, 0.9);
   }
 }
 
 a {
   text-decoration: none;
-  // color: c.$black;
 }
 
 .error-info {
@@ -117,6 +111,7 @@ a {
   padding: 8px 12px;
   border-radius: 20px;
   cursor: pointer;
+  transition: 0.5s ease-out;
 
   &:hover {
     background-color: c.$blue-btn2;

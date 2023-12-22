@@ -14,9 +14,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log(token);
       const decode: any = jwtDecode(token);
-      console.log(decode);
       setId(decode.userId);
       setShowUser(true);
     }
@@ -105,8 +103,21 @@ const Navbar: React.FC = () => {
             </li>
           ) : (
             <li className="navbar__items__navi">
-              <Link to="/">Login</Link>
+              <button
+                className={`navi-btn ${
+                  activeButton === "login" ? "navi-btn--active" : ""
+                }`}
+                onClick={() => {
+                  navigate("/");
+                  setActiveButton("login");
+                }}
+              >
+                Login
+              </button>
             </li>
+            // <li className="navbar__items__navi">
+            //   <Link to="/">Login</Link>
+            // </li>
           )}
         </div>
       </ul>

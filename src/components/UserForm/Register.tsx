@@ -4,7 +4,6 @@ import { addUserAPI } from "../../server/server";
 
 const genders = ["M", "W"];
 const Register = () => {
-  const navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
@@ -78,100 +77,94 @@ const Register = () => {
     <div className="register">
       {section === 1 ? (
         <form className="form-display">
-          <label>
-            Nazwa:
-            <input
-              type="name"
-              name="name"
-              value={registerData.name}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={registerData.email}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Data urodzenia:
-            <input
-              type="date"
-              name="dateOfBirth"
-              value={registerData.dateOfBirth}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Płeć:
-            <select
-              className="language-select"
-              name="gender"
-              value={registerData.gender}
-              onChange={handleChange}
-            >
-              {genders.map((gender, index) => (
-                <option key={index} value={gender}>
-                  {gender === "M" ? "Mężczyzna" : "Kobieta"}{" "}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Kraj:
-            <input
-              type="text"
-              name="country"
-              value={registerData.country}
-              onChange={handleChange}
-            />
-          </label>
+          <input
+            className="form-display__input"
+            type="name"
+            name="name"
+            value={registerData.name}
+            onChange={handleChange}
+            placeholder="Nazwa użytkownika"
+          />
+
+          <input
+            className="form-display__input"
+            type="email"
+            name="email"
+            value={registerData.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+
+          <input
+            className="form-display__input"
+            type="date"
+            name="dateOfBirth"
+            value={registerData.dateOfBirth}
+            onChange={handleChange}
+          />
+
+          <select
+            className="language-select form-display__input"
+            name="gender"
+            value={registerData.gender}
+            onChange={handleChange}
+          >
+            {genders.map((gender, index) => (
+              <option key={index} value={gender}>
+                {gender === "M" ? "Mężczyzna" : "Kobieta"}{" "}
+              </option>
+            ))}
+          </select>
+
+          <input
+            className="form-display__input"
+            type="text"
+            name="country"
+            value={registerData.country}
+            onChange={handleChange}
+            placeholder="Kraj"
+          />
         </form>
       ) : (
         <form className="form-display">
-          <label>
-            Image URL:
-            <input
-              type="text"
-              name="imageUrl"
-              value={registerData.imageUrl}
-              onChange={handleChange}
-            />
-            {registerData.imageUrl && (
-              <img
-                className="form-display__img"
-                width="100px"
-                src={registerData.imageUrl}
-                alt="user avatar"
-              ></img>
-            )}
-          </label>
-          <label>
-            Hasło:
-            <input
-              type="password"
-              name="password"
-              value={registerData.password}
-              onChange={handleChange}
-            />
-            {passwordError && <p className="error-info">{passwordError}</p>}
-          </label>
+          <input
+            className="form-display__input"
+            type="text"
+            name="imageUrl"
+            value={registerData.imageUrl}
+            onChange={handleChange}
+            placeholder="Url do zdjęcia"
+          />
+          {registerData.imageUrl && (
+            <img
+              className="form-display__img"
+              width="100px"
+              src={registerData.imageUrl}
+              alt="user avatar"
+            ></img>
+          )}
 
-          <label>
-            Powtórz hasło:
-            <input
-              type="password"
-              name="confirmPassword"
-              value={registerData.confirmPassword}
-              onChange={handleChange}
-            />
-            {confirmPasswordError && (
-              <p className="error-info">{confirmPasswordError}</p>
-            )}
-          </label>
+          <input
+            className="form-display__input"
+            type="password"
+            name="password"
+            value={registerData.password}
+            onChange={handleChange}
+            placeholder="Hasło"
+          />
+          {passwordError && <p className="error-info">{passwordError}</p>}
+
+          <input
+            className="form-display__input"
+            type="password"
+            name="confirmPassword"
+            value={registerData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Potwierdź hasło"
+          />
+          {confirmPasswordError && (
+            <p className="error-info">{confirmPasswordError}</p>
+          )}
 
           <button
             className="btn-submit"

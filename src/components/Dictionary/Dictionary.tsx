@@ -20,6 +20,8 @@ const Dictionary: React.FC = () => {
 
   return (
     <div className="dictionary">
+      <h2>Wyszukaj słowo</h2>
+
       <div className="dictionary__search">
         <select
           className="language-select"
@@ -42,9 +44,7 @@ const Dictionary: React.FC = () => {
           Wyszukaj
         </button>
       </div>
-      {definition.length === 0 ? (
-        <h2>Wyszukaj słowo</h2>
-      ) : (
+      {definition.length !== 0 && (
         <>
           <p>{definition[0].phonetic}</p>
 

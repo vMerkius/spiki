@@ -22,6 +22,8 @@ type ModuleDetailsProps = {
   setShowQuiz: React.Dispatch<React.SetStateAction<boolean>>;
   setShowLearningMode: React.Dispatch<React.SetStateAction<boolean>>;
   showLearningMode: boolean;
+  progress: number;
+  modules: IModule[];
 };
 
 const ModuleDetails: React.FC<ModuleDetailsProps> = ({
@@ -34,10 +36,15 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
   setShowQuiz,
   setShowLearningMode,
   showLearningMode,
+  progress,
+  modules,
 }) => {
   const [module, setModule] = useState<IModule>();
   const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
   const [lessons, setLessons] = useState<IFlashcard[]>([]);
+  const moduleIndex = modules.findIndex((module) => module.id === moduleId) + 1;
+  const canQuiz = progress < moduleIndex ? true : false;
+  console.log(canQuiz, progress, moduleIndex);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,10 +128,13 @@ const ModuleDetails: React.FC<ModuleDetailsProps> = ({
               <button
                 className="module-details__buttons__quiz-btn"
                 onClick={() => {
-                  setShowQuiz(true);
+                  if (canQuiz) setShowQuiz(true);
+                  else {
+                    alert("Nie możesz wypełnić quizu kolejny raz");
+                  }
                 }}
               >
-                Zakończ moduł i wypełnij quiz
+                Zakończ moduł i wypełnij quiz!
               </button>
             </div>
           )}

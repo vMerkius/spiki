@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-// import UserIcon from "../../../../assets/icons/user-icon.svg";
+import UserIcon from "../../../assets/user-icon.svg";
 
 import "./user-details.scss";
 import { IUser } from "../../../interfaces/IUser";
 import { ICourse } from "../../../interfaces/ICourse";
-import { getUserAPI, getUserCoursesAPI } from "../../../server/server";
+import {
+  getUserAPI,
+  getUserAgeAPI,
+  getUserCoursesAPI,
+} from "../../../server/server";
 
 const UserDetails = () => {
   const navigate = useNavigate();
@@ -19,13 +23,17 @@ const UserDetails = () => {
     country: "",
     imageUrl: "",
   });
+  const [age, setAge] = useState<number>(0);
   const [userCourses, setUserCourses] = useState<ICourse[]>([]);
+  const [changePassword, setChangePassword] = useState<boolean>(false);
   const value = useParams();
   const id = Number(value.id);
 
   useEffect(() => {
     const fetchData = async () => {
+      const fetchedAge = await getUserAgeAPI(id);
       const fetchedUser = await getUserAPI(id);
+      setAge(fetchedAge);
       setUser(fetchedUser);
       const fetchedUserCourses = await getUserCoursesAPI(id);
       setUserCourses(fetchedUserCourses);
@@ -33,30 +41,16 @@ const UserDetails = () => {
     fetchData();
   }, [id]);
 
-  const getAge = (dateOfBirth: Date) => {
-    const dateOfBirthStr = dateOfBirth.toString();
-    const datePart = dateOfBirthStr.split("T")[0];
-    const [year, month, day] = datePart.split("-").map(Number);
-    const today = new Date();
-    const birthDate = new Date(year, month - 1, day);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
   return (
     <div className="user-details-container">
       <div className="user-details-container__main">
-        {/* {user.imageUrl == "" ? (
+        {user.imageUrl == "" ? (
           <img src={UserIcon} alt="user icon" width="300px" />
         ) : (
           <img src={user.imageUrl} alt="user icon" width="300px" />
-        )} */}
+        )}
         <div className="user-details-container__main__info">
-          <h1>User Details:</h1>
+          <h1>Szczegóły</h1>
           <div className="user-details-container__main__info__sections">
             <div>
               <p>
@@ -76,7 +70,7 @@ const UserDetails = () => {
             <div>
               <p>
                 <strong>Age: </strong>
-                {getAge(user.dateOfBirth)}
+                {age}
               </p>
               <p>
                 <strong>Gender: </strong>
@@ -88,12 +82,28 @@ const UserDetails = () => {
               </p>
             </div>
           </div>
+          <button
+            onClick={() => {
+              setChangePassword(true);
+            }}
+          >
+            Zmień hasło
+          </button>
+          {changePassword && (
+            <div className="user-details-container__main__info__change-password">
+              <input type="password" placeholder="Stare hasło" />
+              <input type="password" placeholder="Nowe hasło" />
+              <input type="password" placeholder="Powtórz hasło" />
+              <button>Zmień</button>
+            </div>
+          )}
         </div>
       </div>
-      <h1>Attended courses:</h1>
+      <h1>Kursy:</h1>
       <ul className="user-details-container__courses">
         {userCourses.map((course) => (
           <li
+            key={course.id}
             title="Course details"
             onClick={() => {
               navigate(`/courses/${course.id}`);

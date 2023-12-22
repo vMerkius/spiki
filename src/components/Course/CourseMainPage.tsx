@@ -52,6 +52,8 @@ const CourseMainPage = () => {
           <h1>Wybierz moduł</h1>
         ) : (
           <ModuleDetails
+            progress={progress}
+            modules={modules}
             lessonChosen={lessonChosen}
             flashcardChosen={flashcardChosen}
             setFlashcardChosen={setFlashcardChosen}

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { IFlashcard } from "../../../interfaces/IFlashcard";
 import "./carousel.scss";
 import { ILesson } from "../../../interfaces/ILesson";
+import ArrowLeftIcon from "../../../assets/arrow-left-icon.svg";
+import ArrowRightIcon from "../../../assets/arrow-right-icon.svg";
 
 interface CarouselProps {
   items: Array<IFlashcard> | Array<ILesson>;
@@ -59,18 +61,18 @@ const Carousel: React.FC<CarouselProps> = ({
     <div className="carousel-container">
       <button
         onClick={handlePrev}
-        className="carousel-button"
+        className="arrow-btn arrow-btn--left"
         disabled={currentIndex <= 0}
       >
-        {"<"}
+        <img src={ArrowLeftIcon} alt="arrow left icon" width="30px" />
       </button>
       <div className="carousel-item-container">{renderItems()}</div>
       <button
         onClick={handleNext}
-        className="carousel-button"
+        className="arrow-btn arrow-btn--right"
         disabled={currentIndex >= items.length - 3}
       >
-        {">"}
+        <img src={ArrowRightIcon} alt="arrow right icon" width="30px" />
       </button>
     </div>
   );

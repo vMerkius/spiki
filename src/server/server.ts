@@ -22,6 +22,15 @@ export const getUserAPI = async (id: number) => {
     return {};
   }
 };
+export const getUserAgeAPI = async (id: number) => {
+  try {
+    const res = await axios.get(`${URL}/user/age/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch age:", error);
+    return {};
+  }
+};
 
 export const joinCourseAPI = async (courseId: number, userId: number) => {
   try {

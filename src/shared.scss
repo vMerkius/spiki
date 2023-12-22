@@ -13,11 +13,6 @@ p {
   align-items: center;
   gap: 0.5rem;
 
-  label {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
   &__img {
     margin-top: 10px;
     width: 50%;
@@ -32,18 +27,15 @@ p {
   border: none;
   padding: 10px;
   border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    background-color: c.$white;
-    color: c.$black;
-    border: 2px solid c.$blue-buttons;
-  }
-  &--login {
-    background-color: c.$white;
+  cursor: pointer;
 
-    color: c.$black;
+  &--login {
+    color: c.$white;
+    background-color: c.$blue-btn2;
+    border-radius: 20px;
+
     &:hover {
-      background-color: c.$yellow-back;
+      background-color: rgba(c.$blue-btn2, 0.9);
     }
   }
 }
@@ -88,10 +80,12 @@ a {
   align-items: center;
   border: 1px solid #000;
   border-radius: 50%;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     cursor: pointer;
-    background-color: #8fcadd;
+    background-color: c.$blue-back;
+    scale: 1.1;
   }
   &--left {
     left: -50px;
@@ -115,20 +109,21 @@ a {
 }
 
 .navi-btn {
-  border: 1px solid c.$black;
+  border: none;
+  font-size: 16px;
   background-color: c.$white;
-  border-radius: 20px;
-  padding: 5px 10px;
   color: c.$black;
   overflow: hidden;
-  background-image: linear-gradient(to right, c.$black-back 50%, c.$white 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: background-position 0.5s ease-out;
+  padding: 8px 12px;
+  border-radius: 20px;
   cursor: pointer;
 
   &:hover {
-    background-position: left bottom;
+    background-color: c.$blue-btn2;
+    color: white;
+  }
+  &--active {
+    background-color: c.$blue-btn2;
     color: white;
   }
 }

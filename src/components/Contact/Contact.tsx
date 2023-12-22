@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./contact.scss";
 import { IReportCreation } from "../../interfaces/IReport";
-import { addReportAPI } from "../../server/server";
+import {
+  addReportAPI,
+  getUserAPI,
+  getUserByEmailAPI,
+} from "../../server/server";
+import { jwtDecode } from "jwt-decode";
 
 const topics = [
   "Chcę zgłosić błąd",
@@ -16,6 +21,19 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    let decodedToken: any;
+    if (token) {
+      decodedToken = jwtDecode(token);
+    }
+    const fetchUserByEmail = async () => {
+      const res = await getUserAPI(decodedToken.userId);
+      setEmail(res.email);
+    };
+    fetchUserByEmail();
+  }, []);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value;
@@ -50,20 +68,22 @@ const Contact = () => {
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-form__item">
-        <label htmlFor="email">Email:</label>
+        <h1>Kontakt</h1>
         <input
-          className={`input-style ${!isEmailValid ? "invalid-email" : ""}`}
+          className={` contact-form__item__input input-style ${
+            !isEmailValid ? "invalid-email" : ""
+          }`}
           type="email"
           id="email"
           value={email}
           onChange={handleEmailChange}
+          placeholder="Email"
           required
         />
       </div>
       <div className="contact-form__item">
-        <label htmlFor="topic">Temat:</label>
         <select
-          className="input-style contact-form__item__choice"
+          className="input-style contact-form__item__choice contact-form__item__input"
           id="topic"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
@@ -80,12 +100,12 @@ const Contact = () => {
         </select>
       </div>
       <div className="contact-form__item">
-        <label htmlFor="message">Wiadomość:</label>
         <textarea
-          className="input-style"
+          className="input-style contact-form__item__input"
           id="message"
           value={message}
           onChange={handleMessageChange}
+          placeholder="Wiadomość"
           required
         ></textarea>
       </div>

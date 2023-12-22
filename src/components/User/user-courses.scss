@@ -2,7 +2,8 @@
 .user-courses {
   background-color: c.$white;
   padding: 10px 20px;
-  border: 2px solid c.$blue-back;
+  border: 1px solid c.$blue-btn2;
+  box-shadow: 0 0 10px 0 c.$gray;
   border-radius: 20px;
   position: absolute;
   top: 50%;
@@ -17,8 +18,8 @@
     background-color: c.$white;
     margin-bottom: 20px;
     width: 30vw;
-    border: 2px solid c.$blue-back;
-    // box-shadow: 0 0 10px 0 c.$gray;
+    border: 1px solid c.$blue-btn2;
+    box-shadow: 0 0 2px 0 c.$gray;
     padding: 20px 10px;
     border-radius: 20px;
 
@@ -36,6 +37,9 @@
       &__continue {
         width: 20%;
         &:hover {
+          border: 1px solid c.$blue-btn2;
+          border-radius: 10px;
+
           cursor: pointer;
         }
       }
@@ -44,14 +48,15 @@
   &__join {
     font-size: 16px;
     border-radius: 10px;
-    border: 1px solid c.$blue-back;
+    border: 1px solid c.$blue-btn2;
     background-color: c.$white;
     padding: 10px;
     transition: background-color 1s ease;
 
     &:hover {
-      background-color: rgba(c.$blue-back, 0.8);
+      background-color: rgba(c.$blue-btn2, 0.8);
       cursor: pointer;
+      color: c.$white;
     }
   }
 }

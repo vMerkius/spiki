@@ -18,7 +18,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         className="progress-bar__item"
         style={{
           width: `${progressRatio}%`,
-          backgroundColor: `rgb(95, 226, 243)`,
+          backgroundColor: `rgb(122, 247, 118)`,
         }}
       >
         {" "}

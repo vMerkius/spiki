@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { IFlashcard } from "../../../interfaces/IFlashcard";
 import { getFlashcardAPI, getFlashcardWordsAPI } from "../../../server/server";
 import { IWord } from "../../../interfaces/IWord";
-import ArrowLeftIcon from "../../../../public/icons/arrow-left-icon.svg";
-import ArrowRightIcon from "../../../../public/icons/arrow-right-icon.svg";
+import ArrowLeftIcon from "../../../assets/arrow-left-icon.svg";
+import ArrowRightIcon from "../../../assets/arrow-right-icon.svg";
 import "./flashcards.scss";
 
 type FlashcardsProps = {

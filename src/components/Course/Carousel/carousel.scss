@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  button {
+    position: static;
+    transform: translateX(0);
+  }
 }
 
 .carousel-item-container {
@@ -26,8 +30,8 @@
 
   &:hover {
     transform: translateY(-2px) scaleX(1.1);
-    box-shadow: 0 4px 12px rgba(237, 162, 228, 0.7);
-    border: 2px solid c.$pink-hover;
+    box-shadow: 0 4px 12px c.$blue-btn2;
+    border: 2px solid c.$blue-btn2;
     cursor: pointer;
   }
 }

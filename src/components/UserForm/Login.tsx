@@ -32,24 +32,23 @@ const Login = () => {
   };
   return (
     <form className="form-display">
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={loginData.email}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Hasło:
-        <input
-          type="password"
-          name="password"
-          value={loginData.password}
-          onChange={handleChange}
-        />
-      </label>
+      <input
+        className="form-display__input"
+        type="email"
+        name="email"
+        value={loginData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+
+      <input
+        className="form-display__input"
+        type="password"
+        name="password"
+        value={loginData.password}
+        onChange={handleChange}
+        placeholder="Hasło"
+      />
       <button
         onClick={() => {
           handleLogin();

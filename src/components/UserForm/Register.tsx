@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { addUserAPI } from "../../server/server";
 import CountryDropdown from "./CountryDropdown";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const genders = ["M", "W"];
 const Register = () => {
   const [section, setSection] = useState(1);
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -18,7 +19,10 @@ const Register = () => {
     country: "",
     imageUrl: "",
   });
+  const [captcha, setCaptcha] = useState<string | null>(null);
   const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -26,6 +30,15 @@ const Register = () => {
       ...registerData,
       [event.target.name]: event.target.value,
     });
+
+    if (event.target.name === "email") {
+      if (!event.target.value.match(emailRegex)) {
+        setEmailError("Nieprawidłowy adres e-mail.");
+      } else {
+        setEmailError("");
+      }
+    }
+
     if (event.target.name === "password") {
       if (!event.target.value.match(regex)) {
         setPasswordError(
@@ -95,6 +108,7 @@ const Register = () => {
             onChange={handleChange}
             placeholder="Email"
           />
+          {emailError && <p className="error-info">{emailError}</p>}
 
           <input
             className="form-display__input"
@@ -162,6 +176,10 @@ const Register = () => {
           {confirmPasswordError && (
             <p className="error-info">{confirmPasswordError}</p>
           )}
+          <ReCAPTCHA
+            sitekey="6LfbHjopAAAAAJKj32z_GCaqR0dwiApqU_WBY6-U"
+            onChange={(value) => setCaptcha(value)}
+          />
 
           <button
             className="btn-submit"
@@ -169,6 +187,7 @@ const Register = () => {
             onClick={() => {
               handleRegister();
             }}
+            disabled={!captcha}
           >
             Register
           </button>

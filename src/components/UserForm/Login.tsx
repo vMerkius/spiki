@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { getUserByEmailAPI, loginUserAPI } from "../../server/server";
+import { loginUserAPI } from "../../server/server";
 import { jwtDecode } from "jwt-decode";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [captcha, setCaptcha] = useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
@@ -17,19 +19,16 @@ const Login = () => {
         loginData.email,
         loginData.password
       );
-      console.log(response);
       const decode = jwtDecode(response);
-      console.log(decode);
 
       localStorage.setItem("token", response);
-      console.log(decode.userId);
       navigate(`/user-courses/${decode.userId}`);
-      // navigate(`/user-courses/1`);
     } catch (error) {
       console.error("Błąd logowania", error);
       alert("Niepoprawny email lub hasło.");
     }
   };
+
   return (
     <form className="form-display">
       <input
@@ -49,12 +48,17 @@ const Login = () => {
         onChange={handleChange}
         placeholder="Hasło"
       />
+      <ReCAPTCHA
+        sitekey="6LfbHjopAAAAAJKj32z_GCaqR0dwiApqU_WBY6-U"
+        onChange={(value) => setCaptcha(value)}
+      />
       <button
         onClick={() => {
           handleLogin();
         }}
         type="button"
         className="btn-submit btn-submit--login"
+        disabled={!captcha}
       >
         Zaloguj
       </button>

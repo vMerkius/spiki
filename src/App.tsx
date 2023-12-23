@@ -9,7 +9,6 @@ import UserCourses from "./components/User/UserCourses";
 import Loading from "./components/shared/Loading";
 import Dictionary from "./components/Dictionary/Dictionary";
 import CourseMainPage from "./components/Course/CourseMainPage";
-import LearningMode from "./components/Course/Learning/LearningMode";
 import UserDetails from "./components/User/UserDetails/UserDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import Contact from "./components/Contact/Contact";

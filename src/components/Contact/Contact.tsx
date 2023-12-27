@@ -111,7 +111,7 @@ const Contact = () => {
       </div>
 
       <button className="contact-form__submit" type="submit">
-        Send
+        Wyślij
       </button>
     </form>
   );

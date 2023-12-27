@@ -10,14 +10,14 @@
 }
 
 .cross {
-  border: 7px solid c.$yellow-back;
+  border: 7px solid c.$blue-btn2;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // width: 30px;
+  width: 30px;
   height: 30px;
-  background: c.$black-back;
+  background: c.$blue-btn2;
 
   clip-path: polygon(
     20% 0%,

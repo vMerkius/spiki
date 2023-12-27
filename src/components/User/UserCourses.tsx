@@ -23,32 +23,39 @@ const UserCourses: React.FC = () => {
     <div className="user-courses">
       {showAll && <AllCourses setShowAll={setShowAll} />}
       <h1>Twoje kursy:</h1>
-      <table className="user-courses__table">
-        <thead className="user-courses__table__header">
-          <tr>
-            <th>Język</th>
-            <th>Poziom</th>
-          </tr>
-          {userCourses.map((course) => (
-            <tr className="user-courses__table__row" key={course.id}>
-              <td className="user-courses__table__row__lang">
-                {course.language}
-              </td>
-              <td className="user-courses__table__row__level">
-                {course.level}
-              </td>
-              <td
-                className="user-courses__table__row__continue"
-                onClick={() => {
-                  navigate("/user-courses/" + id + "/" + course.id);
-                }}
-              >
-                Kontynuuj &rarr;
-              </td>
+
+      {userCourses.length !== 0 ? (
+        <table className="user-courses__table">
+          <thead className="user-courses__table__header">
+            <tr>
+              <th>Język</th>
+              <th>Poziom</th>
             </tr>
-          ))}
-        </thead>
-      </table>
+          </thead>
+          <tbody>
+            {userCourses.map((course) => (
+              <tr className="user-courses__table__row" key={course.id}>
+                <td className="user-courses__table__row__lang">
+                  {course.language}
+                </td>
+                <td className="user-courses__table__row__level">
+                  {course.level}
+                </td>
+                <td
+                  className="user-courses__table__row__continue"
+                  onClick={() => {
+                    navigate("/user-courses/" + id + "/" + course.id);
+                  }}
+                >
+                  Kontynuuj &rarr;
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <h2>Nie jesteś zapisany na żaden kurs</h2>
+      )}
 
       <button
         className="user-courses__join"

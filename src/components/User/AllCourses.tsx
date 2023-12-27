@@ -61,20 +61,24 @@ const AllCourses: React.FC<AllCoursesProps> = ({ setShowAll }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <ul>
-          {filteredCourses.map((course) => (
-            <li
-              key={course.id}
-              onClick={() => {
-                handleJoin(course.id);
-              }}
-            >
-              <p className="all-courses-container__window__course">
-                {course.language} - {course.level}
-              </p>
-            </li>
-          ))}
-        </ul>
+        {filteredCourses.length !== 0 || searchTerm === "" ? (
+          <ul>
+            {filteredCourses.map((course) => (
+              <li
+                key={course.id}
+                onClick={() => {
+                  handleJoin(course.id);
+                }}
+              >
+                <p className="all-courses-container__window__course">
+                  {course.language} - {course.level}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Nie znaleziono kursu</p>
+        )}
       </div>
     </div>
   );

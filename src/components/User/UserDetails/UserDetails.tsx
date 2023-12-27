@@ -54,7 +54,7 @@ const UserDetails = () => {
           <div className="user-details-container__main__info__sections">
             <div>
               <p>
-                <strong>Name: </strong>
+                <strong>Nazwa: </strong>
                 {user.name}
               </p>
               <p>
@@ -62,27 +62,28 @@ const UserDetails = () => {
                 {user.email}
               </p>
               <p>
-                <strong>Date of birth: </strong>
+                <strong>Data urodzenia: </strong>
                 {user.dateOfBirth.toString().split("T")[0]}
               </p>
             </div>
 
             <div>
               <p>
-                <strong>Age: </strong>
+                <strong>Wiek: </strong>
                 {age}
               </p>
               <p>
-                <strong>Gender: </strong>
+                <strong>Płeć: </strong>
                 {user.gender}
               </p>
               <p>
-                <strong>Country: </strong>
+                <strong>Kraj: </strong>
                 {user.country}
               </p>
             </div>
           </div>
           <button
+            className="change-password-btn"
             onClick={() => {
               setChangePassword(!changePassword);
             }}
@@ -91,10 +92,24 @@ const UserDetails = () => {
           </button>
           {changePassword && (
             <div className="user-details-container__main__info__change-password">
-              <input type="password" placeholder="Stare hasło" />
-              <input type="password" placeholder="Nowe hasło" />
-              <input type="password" placeholder="Powtórz hasło" />
-              <button>Zmień</button>
+              <input
+                className="user-details-container__main__info__change-password__input"
+                type="password"
+                placeholder="Stare hasło"
+              />
+              <input
+                className="user-details-container__main__info__change-password__input"
+                type="password"
+                placeholder="Nowe hasło"
+              />
+              <input
+                className="user-details-container__main__info__change-password__input"
+                type="password"
+                placeholder="Powtórz hasło"
+              />
+              <button className="change-password-btn change-password-btn--send">
+                Potwierdź
+              </button>
             </div>
           )}
         </div>
@@ -107,13 +122,13 @@ const UserDetails = () => {
               key={course.id}
               title="Course details"
               onClick={() => {
-                navigate(`/courses/${course.id}`);
+                navigate(`/user-courses/${id}/${course.id}`);
               }}
               className="user-details-container__courses__list__item"
             >
-              <h2 className="user-details-container__courses__list__item__navi">
-                {course.language} - {course.level}
-              </h2>
+              <p className="user-details-container__courses__list__item__navi">
+                {course.language} - {course.level} &rarr;
+              </p>
             </li>
           ))}
         </ul>

@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./shared.scss";
 
-// import { useState } from "react";
 import UserForm from "./components/UserForm/UserForm";
 import Navbar from "./components/Navbar/Navbar";
 import UserCourses from "./components/User/UserCourses";
@@ -18,7 +17,7 @@ function App() {
     <Router>
       <div className="page-container">
         <Navbar />
-        {/* <Loading></Loading> */}
+        <Loading></Loading>
         <Routes>
           <Route path="/" element={<UserForm />} />
           <Route path="/dictionary" element={<Dictionary />} />

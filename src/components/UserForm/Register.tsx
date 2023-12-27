@@ -16,8 +16,9 @@ const Register = () => {
     confirmPassword: "",
     dateOfBirth: "",
     gender: "M",
-    country: "",
+    country: "Poland",
     imageUrl: "",
+    isAdmin: false,
   });
   const [captcha, setCaptcha] = useState<string | null>(null);
   const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;

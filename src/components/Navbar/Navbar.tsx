@@ -4,8 +4,11 @@ import "./navbar.scss";
 import UserIcon from "../../assets/user-icon.svg";
 import { jwtDecode } from "jwt-decode";
 import logo from "../../assets/logo.svg";
+import { useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/");
   const navigate = useNavigate();
   const [showUser, setShowUser] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -15,11 +18,20 @@ const Navbar: React.FC = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decode: any = jwtDecode(token);
+      console.log(decode);
+      if (
+        decode.userId !== pathSegments[2] &&
+        (pathSegments[1] === "user-courses" ||
+          pathSegments[1] === "user-details")
+      ) {
+        navigate(`/user-courses/${decode.userId}`);
+      }
       setId(decode.userId);
       setShowUser(true);
     }
     setShowMore(false);
   }, [navigate]);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     setShowUser(false);
@@ -93,11 +105,20 @@ const Navbar: React.FC = () => {
               >
                 <img src={UserIcon} alt="user" width="35px" />
               </button>
-              {/* <>&darr;</> */}
               {showMore && (
                 <div className="navbar__items__navi__more">
-                  <Link to={`/user-details/${id}`}>Details</Link>
-                  <button onClick={handleLogout}>Logout</button>
+                  <Link
+                    className="navbar__items__navi__more__details"
+                    to={`/user-details/${id}`}
+                  >
+                    Szczegóły
+                  </Link>
+                  <button
+                    className="navbar__items__navi__more__logout"
+                    onClick={handleLogout}
+                  >
+                    Wyloguj
+                  </button>
                 </div>
               )}
             </li>
@@ -115,9 +136,6 @@ const Navbar: React.FC = () => {
                 Login
               </button>
             </li>
-            // <li className="navbar__items__navi">
-            //   <Link to="/">Login</Link>
-            // </li>
           )}
         </div>
       </ul>

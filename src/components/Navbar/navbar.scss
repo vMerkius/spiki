@@ -2,7 +2,6 @@
 .navbar {
   width: 100%;
   height: 50px;
-  // background-color: c.$white;
   top: 0;
   left: 0;
   right: 0;
@@ -64,6 +63,25 @@
           color: white;
           font-size: 1.5rem;
           cursor: pointer;
+        }
+        &__logout {
+          padding: 4px 6px;
+          border: 1px solid #000;
+          background-color: c.$light-red;
+          border: none;
+          color: c.$white;
+
+          cursor: pointer;
+          margin-top: 10px;
+          &:hover {
+            background-color: c.$dark-red;
+          }
+        }
+        &__details {
+          color: c.$black;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }

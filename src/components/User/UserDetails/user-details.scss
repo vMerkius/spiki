@@ -1,10 +1,25 @@
 @use "../../../colors.scss" as c;
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .user-details-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 50px);
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   h1,
   h2 {
@@ -12,20 +27,22 @@
   }
 
   &__main {
-    padding: 10px 12px;
+    padding: 14px 22px;
     background-color: c.$white;
     margin-top: 20px;
     display: flex;
-    width: 80%;
+    width: 50%;
     align-items: flex-start;
     justify-content: space-between;
-    border: 2px solid c.$blue-btn2;
+    border: 1px solid c.$blue-btn2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(c.$black, 0.5);
 
     p {
       color: #000;
     }
     img {
-      border: 3px solid #8fcadd;
+      border: 5px solid c.$blue-btn2;
       margin-left: 50px;
     }
 
@@ -34,6 +51,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      align-items: center;
 
       &__sections {
         display: flex;
@@ -41,12 +59,33 @@
         justify-content: center;
         gap: 20px;
       }
+      &__change-password {
+        animation: fadeIn 0.5s ease-out;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 50%;
+        gap: 10px;
+        &__input {
+          min-width: 70%;
+          max-width: 70%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #777;
+          box-sizing: border-box;
+        }
+      }
     }
   }
 
   &__courses {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color: c.$white;
-    width: 60%;
+    width: 30%;
     border: 2px solid c.$blue-btn2;
     display: flex;
     flex-wrap: wrap;
@@ -59,14 +98,43 @@
         padding: 10px;
         &:hover {
           cursor: pointer;
-          background-color: #cbe6ef;
         }
         &__navi {
+          font-size: 20px;
+          margin: 0;
           &:hover {
+            scale: 1.1;
             text-decoration: underline;
           }
         }
       }
+    }
+  }
+}
+
+.change-password-btn {
+  background-color: c.$blue-btn2;
+  width: fit-content;
+  color: c.$white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(c.$blue-btn2, 0.9);
+  }
+  &--send {
+    color: c.$blue-btn2;
+    background-color: c.$white;
+    border: 1px solid c.$blue-btn2;
+
+    &:hover {
+      color: c.$blue-btn2;
+      background-color: c.$white;
+      border: 1px solid c.$blue-btn2;
+      scale: 1.2;
     }
   }
 }

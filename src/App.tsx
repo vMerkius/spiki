@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div className="page-container">
         <Navbar />
-        <Loading></Loading>
+        {/* <Loading></Loading> */}
         <Routes>
           <Route path="/" element={<UserForm />} />
           <Route path="/dictionary" element={<Dictionary />} />
